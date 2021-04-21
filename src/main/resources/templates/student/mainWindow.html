@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<head th:replace="~{fragments/header :: headerFragment}" >
+  <meta charset="UTF-8" >
+  <title >Thymeleaf Springboot </title >
+</head >
+<body >
+<nav th:replace="~{fragments/navBar :: navBarFragment}" ></nav >
+
+<div class="container-fluid " >
+
+  <div class="main-section" >
+    <div class="col-12 " >
+      <div class="row" >
+        <div class="col-4 mt-3" data-sec-authorize="hasAnyAuthority('','')" >
+          <div class="card border-left-primary shadow" >
+            <div class="card-body" >
+              <div class="row no-gutters align-items-center" >
+                <div class="col mr-2" >
+                  <div class="h5 mb-0 font-weight-bold text-gray-800" >Employees</div >
+                  <a href="/employee"                     >
+                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1" >Manage Employee Details
+                    </div >
+                  </a >
+                </div >
+                <div class="col-auto" >
+                  <i class="fas fa-users fa-2x text-gray-300" ></i >
+                </div >
+              </div >
+
+            </div >
+          </div >
+        </div >
+        <div class="col-4 mt-3" data-sec-authorize="hasAnyAuthority('','')" >
+          <div class="card border-left-primary shadow" >
+            <div class="card-body" >
+              <div class="row no-gutters align-items-center" >
+                <div class="col mr-2" >
+                  <div class="h5 mb-0 font-weight-bold text-gray-800" >Students</div >
+                  <a href="/student" >
+                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1" >Manage Student Details
+                    </div >
+                  </a >
+                </div >
+                <div class="col-auto" >
+                  <i class="fas fa-user-tie fa-2x text-gray-300" ></i >
+                </div >
+              </div >
+            </div >
+          </div >
+        </div >
+        <div class="col-4 mt-3" data-sec-authorize="hasAnyAuthority('','')" >
+          <div class="card border-left-primary shadow" >
+            <div class="card-body" >
+              <div class="row no-gutters align-items-center" >
+                <div class="col mr-2" >
+                  <div class="h5 mb-0 font-weight-bold text-gray-800" >Exams</div >
+                  <a href="/batchExam/teacher"                     >
+                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1" >Manage Exam Details</div >
+                  </a >
+                </div >
+                <div class="col-auto" >
+                  <i class="fas fa-book-reader fa-2x text-gray-300" ></i >
+                </div >
+              </div >
+            </div >
+          </div >
+        </div >
+        <div class="col-4 mt-3" data-sec-authorize="hasAnyAuthority('','')" >
+          <div class="card border-left-primary shadow" >
+            <div class="card-body " >
+              <div class="row no-gutters align-items-center" >
+                <div class="col mr-2" >
+                  <div class="h5 mb-0 font-weight-bold text-gray-800" >Classes</div >
+                  <a href="/batch"                    >
+                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1" >Manage Course Details</div >
+                  </a >
+                </div >
+                <div class="col-auto" >
+                  <i class="fas fa-vials fa-2x text-gray-300" ></i >
+                </div >
+              </div >
+            </div >
+          </div >
+        </div >
+        <div class="col-4 mt-3" data-sec-authorize="hasAnyAuthority('','')" >
+          <div class="card border-left-primary shadow" >
+            <div class="card-body" >
+              <div class="row no-gutters align-items-center" >
+                <div class="col mr-2" >
+                  <div class="h5 mb-0 font-weight-bold text-gray-800" >Payments</div >
+                  <a href="/payment" >
+                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1" >Manage Payment Details
+                    </div >
+                  </a >
+                </div >
+                <div class="col-auto" >
+                  <i class="fas fa-dollar-sign fa-2x text-gray-300" ></i >
+                </div >
+              </div >
+            </div >
+          </div >
+        </div >
+        <div class="col-4 mt-3" data-sec-authorize="hasAnyAuthority('','')">
+          <div class="card border-left-primary shadow" >
+            <div class="card-body" >
+              <div class="row no-gutters align-items-center" >
+                <div class="col mr-2" >
+                  <div class="h5 mb-0 font-weight-bold text-gray-800" >Time Table</div >
+                  <a href="/timeTable"
+                      >
+                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1" >Manage Exam Details</div >
+                  </a >
+                </div >
+                <div class="col-auto" >
+                  <i class="fas fa-graduation-cap fa-2x text-gray-300" ></i >
+                </div >
+              </div >
+            </div >
+          </div >
+        </div >
+        <div class="col-4 mt-3" data-sec-authorize="hasAnyAuthority('','')" >
+          <div class="card border-left-primary shadow" >
+            <div class="card-body" >
+              <div class="row no-gutters align-items-center" >
+                <div class="col mr-2" >
+                  <div class="h5 mb-0 font-weight-bold text-gray-800" >Subjects</div >
+                  <a href="/payment" >
+                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1" >Manage Subjects Details
+                    </div >
+                  </a >
+                </div >
+                <div class="col-auto" >
+                  <i class="fas fa-laptop-code fa-2x text-gray-300" ></i >
+                </div >
+              </div >
+            </div >
+          </div >
+        </div >
+      </div >
+    </div >
+  </div >
+</div >
+
+<!--footer include-->
+<div th:replace="~{fragments/footer :: footerFragment}" ></div >
+<!--script include-->
+<div th:replace="~{fragments/script :: scriptFragment}" ></div >
+
+
+</body >
+</html >

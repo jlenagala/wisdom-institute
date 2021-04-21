@@ -1,123 +1,153 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
 <!--Styles, meta data, and title are included-->
-<head data-th-replace="~{fragments/header :: headerFragment}">
-    <meta charset="UTF-8">
-    <title>Thymeleaf Springboot </title>
-</head>
-<body>
+<head data-th-replace="~{fragments/header :: headerFragment}" >
+  <meta charset="UTF-8" >
+  <title >Success Educational Institute</title >
+</head >
+<body >
 <!--Nav bar is included-->
-<nav data-th-replace="~{fragments/navBar :: navBarFragment}"></nav>
+<nav data-th-replace="~{fragments/navBar :: navBarFragment}" ></nav >
 
-<div class="row bg-link">
-    <div class="col-4">
+<div class="container" >
+  <div class="row text-center" >
+    <div class="col-4" >
+      <a href="/batch" >
+        <button class="btn btn-primary" align="center" >All Course</button >
+      </a >
+    </div >
+    <div class="col-4" >
+      <h1 >Course Details</h1 >
+    </div >
+    <div class="col-4" >
+      <a href="/batch/add" >
+        <button class="btn btn-primary" align="center" >Add Course</button >
+      </a >
+    </div >
+  </div >
+</div >
 
-    </div>
-    <div class="col-4">
-        <h1>Batch Details</h1>
-    </div>
-    <div class="col-4">
-        <a href="/batch/new">
-            <button class="btn btn-primary" align="center">New Batch</button>
-        </a>
-    </div>
-</div>
+<div class="container" style="background-color:#d0cdce;" data-th-fragment="batchDetailsFragment" >
+  <div class="row " >
+    <div class="col-6"  >
+      <div class="form-group" >
+        <label data-th-for="${code}" class="col-sm-6 control-label" >Courser Reference</label >
+        <div class="" >
+          <p type="text" id="code" class="form-control" data-th-text="${batchDetail.code}" >
+        </div >
+      </div >
+      <div class="form-group" >
+        <label data-th-for="${'name'}" class="col-sm-3 control-label" >Class name</label >
+        <div class="" >
+          <p type="text" id="name" class="form-control" data-th-text="${batchDetail.name}" >
+        </div >
+      </div >
+    </div >
+    <div class="col-6" >
+      <div class="form-group" >
+        <label data-th-for="${grade}" class="col-sm-3 control-label" >Course Fee</label >
+        <div class="" >
+          <p type="text" id="grade" class="form-control" data-th-text="${batchDetail.courseFee}" >
+        </div >
+      </div >
+      <div class="form-group" >
+        <label data-th-for="${teacherName}" class="col-sm-3 control-label" >Instructor</label >
+        <div class="" >
+          <p type="text" id="teacherName" class="form-control" data-th-text="${batchDetail.employee.name}" >
+        </div >
+      </div >
+    </div >
+  </div >
+  <div class="row" >
+    <div class="col-6" >
+      <!--classDay-->
+      <div class="form-group" >
+        <div class="row" >
+          <div class="col-6" >
+            <div class="form-group" >
+              <label for="startAt1" >FROM :</label >
+              <p type="text" id="startAt1" class="form-control" data-th-text="${batchDetail.startAt}" ></p >
+            </div >
+          </div >
+          <div class="col-6" >
+            <div class="form-group" >
+              <label for="endAt1" >TO :</label >
+              <p type="text" id="endAt1" class="form-control" data-th-text="${batchDetail.endAt}" ></p >
+            </div >
+          </div >
+        </div >
+      </div >
+    </div >
+    <div class="col-6" >
+      <div class="row" >
+        <a class="btn btn-primary" data-toggle="collapse" href="#multiCollapseExample1" role="button"
+           aria-expanded="false" aria-controls="multiCollapseExample1" >Instalment Detail</a >
+        <a class="btn btn-primary ml-2" data-toggle="collapse" href="#multiCollapseExample2" role="button"
+           aria-expanded="false" aria-controls="multiCollapseExample2" >Subject Detail</a >
+      </div >
+      <div class="row" >
+        <div class="col" >
+          <div class="collapse multi-collapse" id="multiCollapseExample1" >
+            <div class="card card-body" >
+              <table class="table table-striped table-inverse " >
+                <thead class="thead-inverse" >
+                <tr >
+                  <th >Index</th >
+                  <th >Date</th >
+                  <th >Amount</th >
+                </tr >
+                </thead >
+                <tbody >
+                <tr data-th-each="instalment, rowIndex : ${batchDetail.instalmentDates }" >
+                  <td data-th-text="${rowIndex.count}" ></td >
+                  <td data-th-text="${{instalment.date}}" ></td >
+                  <td data-th-text="${instalment.amount}" ></td >
+                </tr >
+                </tbody >
+              </table >
+            </div >
+          </div >
+        </div >
+      </div >
+      <div class="row" >
+        <!--subject detail-->
+        <div class="col" >
+          <div class="collapse multi-collapse" id="multiCollapseExample2" >
+            <div class="card card-body" >
+              <table class="table table-striped table-inverse " >
+                <thead class="thead-inverse" >
+                <tr >
+                  <th >Index</th >
+                  <th >Code</th >
+                  <th >Subject Name</th >
+                </tr >
+                </thead >
+                <tbody >
+                <tr data-th-each="subject, rowIndex : ${batchDetail.subjects }" >
+                  <td data-th-text="${rowIndex.count}" ></td >
+                  <td data-th-text="${subject.code}" ></td >
+                  <td data-th-text="${subject.name}" ></td >
+                </tr >
+                </tbody >
+              </table >
+            </div >
+          </div >
+        </div >
+      </div >
+    </div >
 
-<div class="row container-fluid">
-    <div class="col-sm-3"></div>
-    <div class="col-sm-8">
-        <div class="form-group">
-            <label data-th-for="${classReferance}" class="col-sm-3 control-label">Class reference</label>
-            <div class="col-sm-6">
-                <p type="text" id="classReferance" class="form-control" data-th-text="*{batchDetail.classReferance}">
-            </div>
-        </div>
-        <div class="form-group">
-            <label data-th-for="${year}" class="col-sm-3 control-label">Academic Year</label>
-            <div class="col-sm-6">
-                <p type="text" id="year" class="form-control" data-th-text="*{batchDetail.year}">
-            </div>
-        </div>
-        <div class="form-group">
-            <label data-th-for="${grade}" class="col-sm-3 control-label">Grade</label>
-            <div class="col-sm-6">
-                <p type="text" id="grade" class="form-control" data-th-text="*{batchDetail.grade}">
-            </div>
-        </div>
-        <div class="form-group">
-            <label data-th-for="${teacherName}" class="col-sm-3 control-label">Teacher</label>
-            <div class="col-sm-6">
-                <p type="text" id="teacherName" class="form-control" data-th-text="*{batchDetail.teacherName}">
-            </div>
-        </div>
-        <div class="form-group">
-            <label data-th-for="${subjectName}" class="col-sm-3 control-label">Subject Name</label>
-            <div class="col-sm-6">
-                <p type="text" id="subjectName" class="form-control" data-th-text="*{batchDetail.subjectName}">
-            </div>
-        </div>
-
-        <div class="row container-fluid">
-            <div class="col-sm-2 col-sm-offset-2">
-                <a href="/batch">
-                <button type="link"  class="btn btn-danger btn-block" >Back</button>
-                </a>
-            </div>
-
-        </div>
-    </div>
-    <div class="col-sm-1"></div>
-</div>
-<!--&lt;!&ndash;Batch detail&ndash;&gt;-->
-<!--<div class="container-fluid" data-th-fragment="batchDetail">-->
-<!--    &lt;!&ndash;Class Referance&ndash;&gt;-->
-<!--    <div class="form-row text-right">-->
-<!--        <div class="col-md-4">-->
-<!--            <label class="control-label" data-th-for="${classReferance}">Class Referance :</label>-->
-<!--        </div>-->
-<!--        <div class="col-md-8">-->
-<!--            <p class="form-control" data-th-text="${batchDetail.classReferance}"></p>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--    &lt;!&ndash;Grade&ndash;&gt;-->
-<!--    <div class="form-row text-right">-->
-<!--        <div class="col-md-4">-->
-<!--            <label class="control-label" data-th-for="${grade}">Grade :</label>-->
-<!--        </div>-->
-<!--        <div class="col-md-8">-->
-<!--            <p class="form-control" data-th-text="${batchDetail.grade}"></p>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--    &lt;!&ndash;Year&ndash;&gt;-->
-<!--    <div class="form-row text-right">-->
-<!--        <div class="col-md-4">-->
-<!--            <label class="control-label" data-th-for="${year}">year :</label>-->
-<!--        </div>-->
-<!--        <div class="col-md-8">-->
-<!--            <p class="form-control" data-th-text="${batchDetail.year}"></p>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--    &lt;!&ndash;Teacher&ndash;&gt;-->
-<!--    <div class="form-row text-right">-->
-<!--        <div class="col-md-4">-->
-<!--            <label class="control-label" data-th-for="${teacherName}">Teacher Name :</label>-->
-<!--        </div>-->
-<!--        <div class="col-md-8">-->
-<!--            <p class="form-control" data-th-text="${batchDetail.teacherName}"></p>-->
-<!--        </div>-->
-<!--    </div>-->
-
-
-<!--</div>-->
-<!--&lt;!&ndash;Button&ndash;&gt;-->
-<!--<div class="form-batch col-md-12 col-sm-12 text-center flex-column ">-->
-<!--    <a href="/batch">-->
-<!--        <button class="btn btn-success" tabindex="21" type="submit">-->
-<!--            Back-->
-<!--        </button>-->
-<!--    </a>-->
-<!--</div>-->
-
-
-</body>
-</html>
+  </div >
+</div >
+<div class="row container-fluid" >
+  <div class="col text-center" >
+    <a href="/batch" >
+      <button type="link" class="btn btn-danger " >Back</button >
+    </a >
+  </div >
+</div >
+<!--footer include-->
+<div data-th-replace="~{fragments/footer :: footerFragment}" ></div >
+<!--script include-->
+<div data-th-replace="~{fragments/script :: scriptFragment}" ></div >
+</body >
+</html >

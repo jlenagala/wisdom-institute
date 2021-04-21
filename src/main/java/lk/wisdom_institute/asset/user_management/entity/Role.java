@@ -6,8 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import java.util.List;
 
 @Entity
@@ -17,7 +18,6 @@ import java.util.List;
 @NoArgsConstructor
 public class Role extends AuditEntity {
 
-    @NotNull
     @Column( unique = true )
     private String roleName;
 

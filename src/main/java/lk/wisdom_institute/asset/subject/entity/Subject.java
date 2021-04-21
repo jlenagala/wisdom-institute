@@ -2,19 +2,17 @@ package lk.wisdom_institute.asset.subject.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonFilter;
-
 import lk.wisdom_institute.asset.batch.entity.Batch;
-import lk.wisdom_institute.asset.student.entity.Student;
-import lk.wisdom_institute.asset.teacher.entity.Teacher;
+import lk.wisdom_institute.asset.batch_exam.entity.BatchExam;
+import lk.wisdom_institute.asset.common_asset.model.enums.LiveDead;
+import lk.wisdom_institute.asset.time_table.entity.TimeTable;
 import lk.wisdom_institute.util.audit.AuditEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.List;
 
 
@@ -26,18 +24,22 @@ import java.util.List;
 @JsonFilter( "Subject" )
 public class Subject extends AuditEntity {
 
-    private String code;
+  @Column( unique = true )
+  private String code;
 
-    private String name;
+  @Column( unique = true )
+  private String name;
 
-    @OneToMany(mappedBy = "subject")
-    private List< Batch > batches;
+  @Enumerated( EnumType.STRING )
+  private LiveDead liveDead;
 
-    @ManyToMany(mappedBy = "subjects")
-    private List< Student > students;
+  @OneToMany(mappedBy = "subject")
+  private List< BatchExam > batchExams;
 
-    @OneToMany(mappedBy = "subject")
-    private List< Teacher > teachers;
+  @OneToMany(mappedBy = "subject")
+  private List< TimeTable > timeTables;
 
+  @ManyToMany(mappedBy = "subjects")
+  private List< Batch > batches;
 
 }

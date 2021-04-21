@@ -1,7 +1,12 @@
 package lk.wisdom_institute.asset.student.controller;
 
 
-import lk.wisdom_institute.asset.school.service.SchoolService;
+import lk.wisdom_institute.asset.batch.controller.BatchController;
+import lk.wisdom_institute.asset.batch.entity.Batch;
+import lk.wisdom_institute.asset.batch.service.BatchService;
+import lk.wisdom_institute.asset.batch_student.service.BatchStudentService;
+import lk.wisdom_institute.asset.common_asset.model.enums.Gender;
+import lk.wisdom_institute.asset.common_asset.model.enums.LiveDead;
 import lk.wisdom_institute.asset.student.entity.Student;
 import lk.wisdom_institute.asset.student.service.StudentService;
 import lk.wisdom_institute.util.interfaces.AbstractController;
@@ -10,85 +15,125 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping( "/student" )
 public class StudentController implements AbstractController< Student, Integer > {
-    private final StudentService studentService;
+  private final StudentService studentService;
+  private final BatchService batchService;
+  private final BatchStudentService batchStudentService;
+  private final MakeAutoGenerateNumberService makeAutoGenerateNumberService;
 
-    private final SchoolService schoolService;
-    private final MakeAutoGenerateNumberService makeAutoGenerateNumberService;
+  public StudentController(StudentService studentService, BatchService batchService,
+                           BatchStudentService batchStudentService,
+                           MakeAutoGenerateNumberService makeAutoGenerateNumberService) {
+    this.studentService = studentService;
+    this.batchService = batchService;
+    this.batchStudentService = batchStudentService;
+    this.makeAutoGenerateNumberService = makeAutoGenerateNumberService;
+  }
 
-    public StudentController(StudentService studentService,
-                             SchoolService schoolService, MakeAutoGenerateNumberService makeAutoGenerateNumberService) {
-        this.studentService = studentService;
-        this.schoolService = schoolService;
-        this.makeAutoGenerateNumberService = makeAutoGenerateNumberService;
+
+  @GetMapping
+  public String findAll(Model model) {
+    model.addAttribute("students", studentService.findAll()
+        .stream()
+        .filter(x -> x.getLiveDead().equals(LiveDead.ACTIVE))
+        .collect(Collectors.toList()));
+    model.addAttribute("studentRemoveBatch", false);
+    return "student/student";
+  }
+
+  private String commonThing(Model model, Student student, boolean addStatus) {
+    model.addAttribute("student", student);
+    model.addAttribute("addStatus", addStatus);
+    model.addAttribute("liveDeads", LiveDead.values());
+    if ( student.getBatchStudents() == null ) {
+      model.addAttribute("batches", batchService.findAll());
+    } else {
+      List< Batch > batches = batchService.findAll();
+      student.getBatchStudents().forEach(x -> batches.remove(x.getBatch()));
+      model.addAttribute("batches", batches);
     }
 
-    @GetMapping
-    public String findAll(Model model) {
-        model.addAttribute("students", studentService.findAll());
-        return "student/student";
-    }
+    model.addAttribute("gender", Gender.values());
+    model.addAttribute("batchUrl", MvcUriComponentsBuilder
+        .fromMethodName(BatchController.class, "findByBatchId", "")
+        .build()
+        .toString());
+    return "student/addStudent";
+  }
 
-    @GetMapping( "/new" )
-    public String form(Model model) {
-        model.addAttribute("student", new Student());
-        model.addAttribute("schools", schoolService.findAll());
-        model.addAttribute("addStatus", true);
-        return "student/addStudent";
-    }
+  @GetMapping( "/add" )
+  public String form(Model model) {
 
-    @GetMapping( "/view/{id}" )
-    public String findById(@PathVariable Integer id, Model model) {
-        model.addAttribute("studentDetail", studentService.findById(id));
-        return "student/student-detail";
-    }
+    return commonThing(model, new Student(), true);
+  }
 
-    @GetMapping( "/edit/{id}" )
-    public String edit(@PathVariable Integer id, Model model) {
-        model.addAttribute("student", studentService.findById(id));
-        model.addAttribute("schools", schoolService.findAll());
-        model.addAttribute("addStatus", false);
-        return "student/addStudent";
-    }
+  @GetMapping( "/view/{id}" )
+  public String findById(@PathVariable Integer id, Model model) {
+    model.addAttribute("studentDetail", studentService.findById(id));
+    return "student/student-detail";
+  }
 
-    @PostMapping( "/save" )
-    public String persist(@Valid @ModelAttribute Student student, BindingResult bindingResult,
-                          RedirectAttributes redirectAttributes, Model model) {
-        if ( bindingResult.hasErrors() ) {
-            model.addAttribute("student", student);
-            model.addAttribute("schools", schoolService.findAll());
-            model.addAttribute("addStatus", true);
-            return "student/addStudent";
-        }
+  @GetMapping( "/edit/{id}" )
+  public String edit(@PathVariable Integer id, Model model) {
+    return commonThing(model, studentService.findById(id), false);
+  }
+
+  @PostMapping( "/save" )
+  public String persist(@Valid @ModelAttribute Student student, BindingResult bindingResult,
+                        RedirectAttributes redirectAttributes, Model model) {
+    if ( bindingResult.hasErrors() ) {
+      return commonThing(model, student, true);
+    }
 
 //there are two different situation
-        //1. new Student -> need to generate new number
-        //2. update student -> no required to generate number
-        if ( student.getId() == null ) {
-            // need to create auto generated registration number
-            Student lastStudent = studentService.lastStudentOnDB();
-            //registration number format => SS200001
-            if ( lastStudent != null ) {
-                String lastNumber = lastStudent.getRegNo().substring(2);
-                student.setRegNo("SS" + makeAutoGenerateNumberService.numberAutoGen(lastNumber));
-            } else {
-                student.setRegNo("SS" + makeAutoGenerateNumberService.numberAutoGen(null));
-            }
-        }
-        studentService.persist(student);
-        return "redirect:/student";
-
+    //1. new Student -> need to generate new number
+    //2. update student -> no required to generate number
+    if ( student.getId() == null ) {
+      // need to create auto generated registration number
+      Student lastStudent = studentService.lastStudentOnDB();
+      if ( lastStudent != null ) {
+        String lastNumber = lastStudent.getRegNo().substring(3);
+        student.setRegNo("SSS" + makeAutoGenerateNumberService.numberAutoGen(lastNumber));
+      } else {
+        student.setRegNo("SSS" + makeAutoGenerateNumberService.numberAutoGen(null));
+      }
     }
+    studentService.persist(student);
+    student.getBatchStudents().forEach(x -> {
+      x.setStudent(student);
+      batchStudentService.persist(x);
+    });
+    return "redirect:/student";
 
-    @GetMapping( "/delete/{id}" )
-    public String delete(@PathVariable Integer id, Model model) {
-        studentService.delete(id);
-        return "redirect:/student";
+  }
+
+  @GetMapping( "/delete/{id}" )
+  public String delete(@PathVariable Integer id, Model model) {
+    studentService.delete(id);
+    return "redirect:/student";
+  }
+
+  @PostMapping( "/search" )
+  public String search(@ModelAttribute Student student, Model model) {
+    List< Student > students = studentService.search(student);
+
+    if ( students.isEmpty() ) {
+      model.addAttribute("student", true);
+      return "student/studentChooser";
+    } else if ( students.size() == 1 ) {
+      return "redirect:/payment/add/" + students.get(0).getId();
+    } else {
+      model.addAttribute("students", students);
+      return "student/studentChooser";
     }
+  }
 }

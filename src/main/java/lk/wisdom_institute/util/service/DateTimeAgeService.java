@@ -58,6 +58,14 @@ public class DateTimeAgeService {
     public LocalDateTime dateTimeToLocalDateEndInDay(LocalDate localDate) {
         return localDate.atTime(21, 59, 59, 999999999);
     }
+    public LocalDateTime dateTimeToLocalDateStartInDayWithOutNano(LocalDate localDate) {
+        return localDate.atTime(0, 0, 0);
+    }
+
+
+    public LocalDateTime dateTimeToLocalDateEndInDayWithOutNano(LocalDate localDate) {
+        return localDate.atTime(21, 59, 59);
+    }
 
     public int getMonthDifference(LocalDate from, LocalDate to) {
         return Period.between(from, to).getMonths();
@@ -81,4 +89,7 @@ public class DateTimeAgeService {
     }
 
 
+  public LocalDate getLocalDateTImeToLocalDate(LocalDateTime localDateTime) {
+  return LocalDate.of(localDateTime.getYear(), localDateTime.getMonthValue(), localDateTime.getDayOfMonth());
+    }
 }

@@ -1,71 +1,111 @@
 package lk.wisdom_institute.asset.subject.controller;
 
 
+
+import lk.wisdom_institute.asset.common_asset.model.enums.LiveDead;
 import lk.wisdom_institute.asset.subject.entity.Subject;
 import lk.wisdom_institute.asset.subject.service.SubjectService;
 import lk.wisdom_institute.util.interfaces.AbstractController;
+import lk.wisdom_institute.util.service.MakeAutoGenerateNumberService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 
 @Controller
-@RequestMapping("/subject")
-public class SubjectController implements AbstractController<Subject, Integer> {
-    private final SubjectService subjectService;
+@RequestMapping( "/subject" )
+public class SubjectController implements AbstractController< Subject, Integer > {
+  private final SubjectService subjectService;
+  private final MakeAutoGenerateNumberService makeAutoGenerateNumberService;
 
-    public SubjectController(SubjectService subjectService) {
-        this.subjectService = subjectService;
+  public SubjectController(SubjectService subjectService, MakeAutoGenerateNumberService makeAutoGenerateNumberService) {
+    this.subjectService = subjectService;
+    this.makeAutoGenerateNumberService = makeAutoGenerateNumberService;
+  }
+
+  @GetMapping
+  public String findAll(Model model) {
+    model.addAttribute("addStatus", false);
+    model.addAttribute("subjects",
+                       subjectService.findAll());
+    return "subject/subject";
+  }
+
+  @GetMapping("/delete")
+  public String findAllDeleted(Model model) {
+    model.addAttribute("addStatus", true);
+    model.addAttribute("subjects",
+                       subjectService.findAllDeleted());
+    return "subject/subject";
+  }
+
+  @GetMapping( "/add" )
+  public String form(Model model) {
+    model.addAttribute("subject", new Subject());
+    model.addAttribute("addStatus", true);
+    return "subject/addSubject";
+  }
+
+  @GetMapping( "/view/{id}" )
+  public String findById(@PathVariable Integer id, Model model) {
+    model.addAttribute("subjectDetail", subjectService.findById(id));
+    return "subject/subject-detail";
+  }
+
+  @GetMapping( "/edit/{id}" )
+  public String edit(@PathVariable Integer id, Model model) {
+    model.addAttribute("subject", subjectService.findById(id));
+    model.addAttribute("addStatus", false);
+    return "subject/addSubject";
+  }
+
+  @PostMapping( "/save" )
+  public String persist(@Valid @ModelAttribute Subject subject, BindingResult bindingResult,
+                        RedirectAttributes redirectAttributes, Model model) {
+    if ( bindingResult.hasErrors() ) {
+      model.addAttribute("subject", subject);
+      model.addAttribute("addStatus", true);
+      return "subject/addSubject";
+    }
+    if ( subject.getId() == null ) {
+      Subject lastSubject = subjectService.lastSubject();
+      if ( lastSubject == null ) {
+        subject.setCode("RWS" + makeAutoGenerateNumberService.numberAutoGen(null).toString());
+      } else {
+        subject.setCode("RWS" + makeAutoGenerateNumberService.numberAutoGen(lastSubject.getCode()
+                                                                                 .substring(3)).toString());
+      }
     }
 
-    @GetMapping
-    public String findAll(Model model) {
-        model.addAttribute("subjects", subjectService.findAll());
-        return "subject/subject";
+    try {
+      subjectService.persist(subject);
+    } catch ( Exception e ) {
+      ObjectError error = new ObjectError("subject",
+                                          "Please fix following errors which you entered .\n System message -->" + e.getCause().getCause().getMessage());
+      bindingResult.addError(error);
+      model.addAttribute("subject", subject);
+      model.addAttribute("addStatus", true);
+      return "subject/addSubject";
     }
+    return "redirect:/subject";
 
-    @GetMapping("/new")
-    public String form(Model model) {
-        model.addAttribute("subject", new Subject());
+  }
 
-        model.addAttribute("addStatus",true);
-        return "subject/addSubject";
-    }
+  @GetMapping( "/delete/{id}" )
+  public String delete(@PathVariable Integer id, Model model) {
+    subjectService.delete(id);
+    return "redirect:/subject";
+  }
 
-    @GetMapping("/view/{id}")
-    public String findById(@PathVariable Integer id, Model model) {
-        model.addAttribute("subjectDetail", subjectService.findById(id));
-        return "subject/subject-detail";
-    }
-
-    @GetMapping("/edit/{id}")
-    public String edit(@PathVariable Integer id, Model model) {
-        model.addAttribute("subject", subjectService.findById(id));
-
-        model.addAttribute("addStatus",false);
-        return "subject/addSubject";
-    }
-
-    @PostMapping("/save")
-    public String persist(@Valid @ModelAttribute Subject subject, BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model) {
-        if (bindingResult.hasErrors()) {
-            model.addAttribute("subject", subject);
-
-            model.addAttribute("addStatus",true);
-            return "subject/addSubject";
-        }
-
-        subjectService.persist(subject);
-        return "redirect:/subject";
-
-    }
-
-    @GetMapping("/delete/{id}")
-    public String delete(@PathVariable Integer id, Model model) {
-        subjectService.delete(id);
-        return "redirect:/subject";
-    }
+  @GetMapping( "/active/{id}" )
+  public String active(@PathVariable Integer id) {
+    Subject subject = subjectService.findById(id);
+    subject.setLiveDead(LiveDead.ACTIVE);
+    subjectService.persist(subject);
+    return "redirect:/subject/delete";
+  }
 }

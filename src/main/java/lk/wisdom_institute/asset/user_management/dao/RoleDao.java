@@ -1,5 +1,6 @@
 package lk.wisdom_institute.asset.user_management.dao;
 
+
 import lk.wisdom_institute.asset.user_management.entity.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

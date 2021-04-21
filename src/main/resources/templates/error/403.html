@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" >
+<!--Styles, meta data, and title are included-->
+<head data-th-replace="~{fragments/header :: headerFragment}" >
+  <meta charset="UTF-8" >
+  <title >Student Management system</title >
+</head >
+<body >
+<!--Nav bar is included-->
+<nav data-th-replace="~{fragments/navBar :: navBarFragment}" ></nav >
+
+
+<div class="container-fluid text-center vh-75">
+  <h1 class="h-50 p-5 font-weight-bolder">403</h1>
+  <h3>Sorry guys you have no permission go there please contact admin. </h3>
+  <h5>Other thing do not use search bar to go between pages</h5>
+  <h6>):</h6>
+</div>
+
+<div class="container-fluid">
+  <div class="container-fluid text-center">
+    <a href="/home">
+      <button class="btn btn-info" type="submit">
+        <i class="fa fa-home" style="font-size: 20px"></i>&nbsp; Home
+      </button>
+    </a>
+  </div>
+</div>
+<div data-th-replace="~{fragments/footer :: footerFragment}" ></div >
+<div data-th-replace="~{fragments/script :: scriptFragment}" ></div >
+</body >
+</html >

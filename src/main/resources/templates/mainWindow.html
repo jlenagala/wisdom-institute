@@ -1,206 +1,152 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{fragments/header :: headerFragment}">
-    <meta charset="UTF-8">
-    <title>Thymeleaf Springboot </title>
-</head>
-<body>
-<nav th:replace="~{fragments/navBar :: navBarFragment}"></nav>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<head th:replace="~{fragments/header :: headerFragment}" >
+  <meta charset="UTF-8" >
+  <title >Thymeleaf Springboot </title >
+</head >
+<body >
+<nav th:replace="~{fragments/navBar :: navBarFragment}" ></nav >
 
-<div class="container-fluid">
-    <div class="main-section">
-        <p class="welcome-Notes">Welcome To Complaint Management System of Department of
-                                 Excise</p>
-        <div class="col-12">
-            <div class="row">
-                <div class="col-7">
-                    <div class="form-row">
-                        <div class="col-4">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="tile wide invoice">
-                                        <div class="header">
-                                            <div class="count">
-                                                <i class="fa fa-street-view" aria-hidden="true"></i>
-                                            </div>
-                                            <div class="title">Employees</div>
-                                        </div>
-                                        <a href="/employee">
-                                            <div class="body">
-                                                <div class="title">Manage Employees</div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-4">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="tile wide resource">
-                                        <div class="header">
-                                            <div class="">
-                                                <div class="count"><i class="fa fa-shopping-cart"
-                                                                      aria-hidden="true"></i>
-                                                </div>
-                                                <div class="title">Petitions</div>
-                                            </div>
-                                        </div>
-                                        <a href="/petition">
-                                            <div class="body">
-                                                <div class="title">Inspect Petitions</div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-4">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="tile wide quote">
-                                        <div class="header">
-                                            <div class="">
-                                                <div class="count"><i class="fa fa-newspaper" aria-hidden="true"></i>
-                                                </div>
-                                                <div class="title">Crime</div>
-                                            </div>
+<div class="container-fluid " >
 
-                                        </div>
-                                        <a href="/crime">
-                                            <div class="body">
-                                                <div class="title">Observe Crimes</div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="col-4">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="tile wide resource">
-                                        <div class="header">
-                                            <div class="">
-                                                <div class="count"><i class="fa fa-universal-access"
-                                                                      aria-hidden="true"></i>
-                                                </div>
-                                                <div class="title">Offenders</div>
-                                            </div>
+  <div class="main-section" >
+    <div class="col-12 " >
+      <div class="row" >
+        <div class="col-4 mt-3" data-sec-authorize="hasAnyAuthority('ROLE_ADMIN','')" >
+          <div class="card border-left-primary shadow" >
+            <div class="card-body" >
+              <div class="row no-gutters align-items-center" >
+                <div class="col mr-2" >
+                  <div class="h5 mb-0 font-weight-bold text-gray-800" >Employees</div >
+                  <a href="/employee"                     >
+                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1" >Manage Employee Details
+                    </div >
+                  </a >
+                </div >
+                <div class="col-auto" >
+                  <i class="fas fa-users fa-2x text-gray-300" ></i >
+                </div >
+              </div >
 
-                                        </div>
-                                        <a class href="/offender">
-                                            <div class="body">
-                                                <div class="title">View Offenders</div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-4">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="tile wide quote">
-                                        <div class="header">
-                                            <div class="">
-                                                <div class="count"><i class="fa fa-home" aria-hidden="true"></i>
-                                                </div>
-                                                <div class="title">Working Place</div>
-                                            </div>
-
-                                        </div>
-                                        <a href="/workingPlace">
-                                            <div class="body">
-                                                <div class="title">Manage Working Places</div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-4">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="tile wide invoice">
-                                        <div class="header">
-                                            <div class="">
-                                                <div class="count"><i class="fa fa-bug" aria-hidden="true"></i>
-                                                </div>
-                                                <div class="title">Contravene</div>
-                                            </div>
-
-                                        </div>
-                                        <a href="/workingPlace">
-                                            <div class="body">
-                                                <div class="title">Edit Contravene</div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!--To day petition list-->
-                <div class="col-5 bg-dark formBorder">
-                    <p class="welcome-Notes">To Day Petitions</p>
-                    <!--Petition Lists -->
-                    <div class="container-fluid text-center" id="petitionListPresent">
-                        <table class="table table-hover table-striped" id="myTable">
-                            <thead>
-                            <tr>
-                                <th> Petition Number</th>
-                                <th> Petition Priority</th>
-                                <th> Working Place</th>
-                                <th> State</th>
-                                <th> Modify</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr id="petitionList">
-                                <th id="petitionNumber"></th>
-                                <th id="petitionPriority"></th>
-                                <th id="workingPlace"></th>
-                                <th id="petitionState"></th>
-                                <th>
-                                    <a id="petitionView" class="btn btn-success btn-sm"><i
-                                            class="fa fa-folder-open"></i>&nbsp;View</a>
-                                </th>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="row" id="petitionListNotPresent">
-                        <div class="col-sm-12">
-                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                                <h3 class="text-center text-danger">
-                                    <strong>There is no petition upto know please add petition to the system
-                                            using add user button.
-                                    </strong>
-                                </h3>
-                            </div>
-                        </div>
-                        <script>
-                            $(".alert").alert();
-                        </script>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+            </div >
+          </div >
+        </div >
+        <div class="col-4 mt-3" data-sec-authorize="hasAnyAuthority('ROLE_ADMIN','')" >
+          <div class="card border-left-primary shadow" >
+            <div class="card-body" >
+              <div class="row no-gutters align-items-center" >
+                <div class="col mr-2" >
+                  <div class="h5 mb-0 font-weight-bold text-gray-800" >Students</div >
+                  <a href="/student" >
+                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1" >Manage Student Details
+                    </div >
+                  </a >
+                </div >
+                <div class="col-auto" >
+                  <i class="fas fa-user-tie fa-2x text-gray-300" ></i >
+                </div >
+              </div >
+            </div >
+          </div >
+        </div >
+        <div class="col-4 mt-3" data-sec-authorize="hasAnyAuthority('ROLE_ADMIN','')" >
+          <div class="card border-left-primary shadow" >
+            <div class="card-body" >
+              <div class="row no-gutters align-items-center" >
+                <div class="col mr-2" >
+                  <div class="h5 mb-0 font-weight-bold text-gray-800" >Exams</div >
+                  <a href="/batchExam/teacher"                     >
+                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1" >Manage Exam Details</div >
+                  </a >
+                </div >
+                <div class="col-auto" >
+                  <i class="fas fa-book-reader fa-2x text-gray-300" ></i >
+                </div >
+              </div >
+            </div >
+          </div >
+        </div >
+        <div class="col-4 mt-3" data-sec-authorize="hasAnyAuthority('','')" >
+          <div class="card border-left-primary shadow" >
+            <div class="card-body " >
+              <div class="row no-gutters align-items-center" >
+                <div class="col mr-2" >
+                  <div class="h5 mb-0 font-weight-bold text-gray-800" >Classes</div >
+                  <a href="/batch"                    >
+                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1" >Manage Course Details</div >
+                  </a >
+                </div >
+                <div class="col-auto" >
+                  <i class="fas fa-vials fa-2x text-gray-300" ></i >
+                </div >
+              </div >
+            </div >
+          </div >
+        </div >
+        <div class="col-4 mt-3" data-sec-authorize="hasAnyAuthority('ROLE_ADMIN','')" >
+          <div class="card border-left-primary shadow" >
+            <div class="card-body" >
+              <div class="row no-gutters align-items-center" >
+                <div class="col mr-2" >
+                  <div class="h5 mb-0 font-weight-bold text-gray-800" >Payments</div >
+                  <a href="/payment" >
+                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1" >Manage Payment Details
+                    </div >
+                  </a >
+                </div >
+                <div class="col-auto" >
+                  <i class="fas fa-dollar-sign fa-2x text-gray-300" ></i >
+                </div >
+              </div >
+            </div >
+          </div >
+        </div >
+        <div class="col-4 mt-3" data-sec-authorize="hasAnyAuthority('ROLE_ADMIN','')">
+          <div class="card border-left-primary shadow" >
+            <div class="card-body" >
+              <div class="row no-gutters align-items-center" >
+                <div class="col mr-2" >
+                  <div class="h5 mb-0 font-weight-bold text-gray-800" >Time Table</div >
+                  <a href="/timeTable"
+                      >
+                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1" >Manage Exam Details</div >
+                  </a >
+                </div >
+                <div class="col-auto" >
+                  <i class="fas fa-graduation-cap fa-2x text-gray-300" ></i >
+                </div >
+              </div >
+            </div >
+          </div >
+        </div >
+        <div class="col-4 mt-3" data-sec-authorize="hasAnyAuthority('ROLE_ADMIN','')" >
+          <div class="card border-left-primary shadow" >
+            <div class="card-body" >
+              <div class="row no-gutters align-items-center" >
+                <div class="col mr-2" >
+                  <div class="h5 mb-0 font-weight-bold text-gray-800" >Subjects</div >
+                  <a href="/payment" >
+                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1" >Manage Subjects Details
+                    </div >
+                  </a >
+                </div >
+                <div class="col-auto" >
+                  <i class="fas fa-laptop-code fa-2x text-gray-300" ></i >
+                </div >
+              </div >
+            </div >
+          </div >
+        </div >
+      </div >
+    </div >
+  </div >
+</div >
 
 <!--footer include-->
-<footer th:replace="~{fragments/footer :: footerFragment}"></footer>
+<div th:replace="~{fragments/footer :: footerFragment}" ></div >
 <!--script include-->
-<script th:replace="~{fragments/script :: scriptFragment}"></script>
+<div th:replace="~{fragments/script :: scriptFragment}" ></div >
 
-</body>
-</html>
 
+</body >
+</html >
