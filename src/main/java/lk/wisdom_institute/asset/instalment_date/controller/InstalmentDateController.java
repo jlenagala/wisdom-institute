@@ -1,9 +1,9 @@
 package lk.wisdom_institute.asset.instalment_date.controller;
 
-import lk.real_way_institute.asset.instalment_date.entity.InstalmentDate;
-import lk.real_way_institute.asset.instalment_date.service.InstalmentDateService;
-import lk.real_way_institute.util.interfaces.AbstractController;
-import lk.real_way_institute.util.service.MakeAutoGenerateNumberService;
+import lk.wisdom_institute.asset.instalment_date.entity.InstalmentDate;
+import lk.wisdom_institute.asset.instalment_date.service.InstalmentDateService;
+import lk.wisdom_institute.util.interfaces.AbstractController;
+import lk.wisdom_institute.util.service.MakeAutoGenerateNumberService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,7 +15,7 @@ import javax.validation.Valid;
 
 @Controller
 @RequestMapping( "/instalmentDate" )
-public class InstalmentDateController implements AbstractController< InstalmentDate, Integer > {
+public class InstalmentDateController implements AbstractController<InstalmentDate, Integer > {
   private final InstalmentDateService instalmentDateService;
   private final MakeAutoGenerateNumberService makeAutoGenerateNumberService;
 

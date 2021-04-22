@@ -1,5 +1,5 @@
 .border-left-primary {
-    border-left: 0.75rem solid rgb(37, 57, 123) !important;
+    border-left: 0.75rem solid rgb(235, 235, 235) !important;
 }
 
 .shadow {
@@ -11,7 +11,7 @@
 }
 
 .border-left-primary :hover {
-    background: #5EBA47;
+    background: #bbcbf0;
     transition: background-color 1000ms linear;
     cursor: pointer;
 }
@@ -25,40 +25,40 @@
 }
 
 #loginPage {
-    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+ /*  box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;*/
 }
 
 body {
-    background: rgb(63, 251, 233);
-    background: radial-gradient(circle, rgba(63, 251, 233, 0.16290266106442575) 58%, rgba(87, 189, 208, 1) 100%);
+    background: rgb(235, 235, 235);
+    background: radial-gradient(circle, rgba(235, 235, 235, 0.16290266106442575) 58%, rgba(235, 235, 235, 1) 100%);
 }
 
 #navBarLogo {
     border: 2px solid #fff;
-    box-shadow: 10px 10px 5px #ccc;
+    box-shadow: 5px 5px 3px #112b69 ;
     border-radius: 5px;
-    width: 80%;
+    width: 80%
 }
 
 .dropdown-menu {
     padding: 1rem 0;
-    background-color: #beefb3;
+    background-color: #bbcbf0;
 
 }
 
 .dropdown-item {
-    text-align: center;
     padding: 0.6rem ;
     font-weight: 500;
+    text-align: left;
 }
 .dropdown-toggle{
     border: 2px solid #fff;
-    box-shadow: 5px 5px 2.5px #ccc;
+    box-shadow: 3px 3px 2px #ccc;
     border-radius: 5px;
     margin-left: 5px;
 }
 .dropdown-toggle:hover{
-    background: #5EBA47;
+    background: #bbcbf0;
     transition: background-color 1500ms linear;
     cursor: pointer;
 }

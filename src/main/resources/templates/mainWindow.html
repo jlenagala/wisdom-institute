@@ -12,7 +12,7 @@
   <div class="main-section" >
     <div class="col-12 " >
       <div class="row" >
-        <div class="col-4 mt-3" data-sec-authorize="hasAnyAuthority('ROLE_ADMIN','')" >
+        <div class="col-4 mt-3" data-sec-authorize="hasAnyAuthority('ROLE_ADMIN','ROLE_MANAGER')" >
           <div class="card border-left-primary shadow" >
             <div class="card-body" >
               <div class="row no-gutters align-items-center" >
@@ -31,7 +31,7 @@
             </div >
           </div >
         </div >
-        <div class="col-4 mt-3" data-sec-authorize="hasAnyAuthority('ROLE_ADMIN','')" >
+        <div class="col-4 mt-3" data-sec-authorize="hasAnyAuthority('ROLE_ADMIN','ROLE_MANAGER','ROLE_CASHIER','ROLE_SECTION_HEAD')" >
           <div class="card border-left-primary shadow" >
             <div class="card-body" >
               <div class="row no-gutters align-items-center" >
@@ -49,7 +49,7 @@
             </div >
           </div >
         </div >
-        <div class="col-4 mt-3" data-sec-authorize="hasAnyAuthority('ROLE_ADMIN','')" >
+        <div class="col-4 mt-3" data-sec-authorize="hasAnyAuthority('ROLE_ADMIN','ROLE_MANAGER','ROLE_SECTION_HEAD')" >
           <div class="card border-left-primary shadow" >
             <div class="card-body" >
               <div class="row no-gutters align-items-center" >
@@ -66,14 +66,14 @@
             </div >
           </div >
         </div >
-        <div class="col-4 mt-3" data-sec-authorize="hasAnyAuthority('','')" >
+        <div class="col-4 mt-3" data-sec-authorize="hasAnyAuthority('ROLE_MANAGER','ROLE_CASHIER','ROLE_SECTION_HEAD')" >
           <div class="card border-left-primary shadow" >
             <div class="card-body " >
               <div class="row no-gutters align-items-center" >
                 <div class="col mr-2" >
                   <div class="h5 mb-0 font-weight-bold text-gray-800" >Classes</div >
                   <a href="/batch"                    >
-                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1" >Manage Course Details</div >
+                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1" >Manage Class Details</div >
                   </a >
                 </div >
                 <div class="col-auto" >
@@ -83,7 +83,7 @@
             </div >
           </div >
         </div >
-        <div class="col-4 mt-3" data-sec-authorize="hasAnyAuthority('ROLE_ADMIN','')" >
+        <div class="col-4 mt-3" data-sec-authorize="hasAnyAuthority('ROLE_MANAGER','')" >
           <div class="card border-left-primary shadow" >
             <div class="card-body" >
               <div class="row no-gutters align-items-center" >
@@ -101,14 +101,14 @@
             </div >
           </div >
         </div >
-        <div class="col-4 mt-3" data-sec-authorize="hasAnyAuthority('ROLE_ADMIN','')">
+        <div class="col-4 mt-3" data-sec-authorize="hasAnyAuthority('ROLE_MANAGER','ROLE_CASHIER','ROLE_SECTION_HEAD')">
           <div class="card border-left-primary shadow" >
             <div class="card-body" >
               <div class="row no-gutters align-items-center" >
                 <div class="col mr-2" >
                   <div class="h5 mb-0 font-weight-bold text-gray-800" >Time Table</div >
                   <a href="/timeTable"
-                      >
+                  >
                     <div class="text-xs font-weight-bold text-primary text-uppercase mb-1" >Manage Exam Details</div >
                   </a >
                 </div >
@@ -119,7 +119,7 @@
             </div >
           </div >
         </div >
-        <div class="col-4 mt-3" data-sec-authorize="hasAnyAuthority('ROLE_ADMIN','')" >
+        <div class="col-4 mt-3" data-sec-authorize="hasAnyAuthority('ROLE_ADMIN','ROLE_CASHIER','ROLE_SECTION_HEAD')" >
           <div class="card border-left-primary shadow" >
             <div class="card-body" >
               <div class="row no-gutters align-items-center" >
