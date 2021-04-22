@@ -58,7 +58,7 @@ public class ProfileController {
       user.setPassword(passwordChange.getNewPassword());
       userService.persist(user);
 
-      redirectAttributes.addFlashAttribute("message", "Congratulations .!! Successfully password is changed");
+      redirectAttributes.addFlashAttribute("message", "Congratulations .!! Success password is changed");
       redirectAttributes.addFlashAttribute("alertClass", "alert-success");
       return "redirect:/home";
 

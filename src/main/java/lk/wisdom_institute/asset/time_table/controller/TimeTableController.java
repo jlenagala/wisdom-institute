@@ -228,9 +228,9 @@ public class TimeTableController {
       if ( timeTable.getId() == null ) {
         TimeTable lastTimeTable = timeTableService.lastTimeTable();
         if ( lastTimeTable == null ) {
-          timeTable.setCode("SSTM" + makeAutoGenerateNumberService.numberAutoGen(null).toString());
+          timeTable.setCode("TMTB" + makeAutoGenerateNumberService.numberAutoGen(null).toString());
         } else {
-          timeTable.setCode("SSTM" + makeAutoGenerateNumberService.numberAutoGen(lastTimeTable.getCode().substring(4)).toString());
+          timeTable.setCode("TMTB" + makeAutoGenerateNumberService.numberAutoGen(lastTimeTable.getCode().substring(4)).toString());
         }
       }
       TimeTable timeTableDb = timeTableService.persist(timeTable);
@@ -240,7 +240,7 @@ public class TimeTableController {
           if ( student.getEmail() != null ) {
             String message = "Dear " + student.getName() + "\n Your " + timeTableDb.getBatch().getName() + " class " +
                 "would be held from " + timeTableDb.getStartAt() + " to " + timeTableDb.getEndAt() + "\n Thanks \n " +
-                "You ";
+                "You";
             emailService.sendEmail(student.getEmail(), "Time Table - Notification", message);
           }
         });

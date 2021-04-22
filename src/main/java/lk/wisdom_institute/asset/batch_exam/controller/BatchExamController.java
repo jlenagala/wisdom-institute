@@ -116,9 +116,9 @@ public class BatchExamController {
       BatchExam lastBatchExam = batchExamService.lastBatchExamDB();
       if ( lastBatchExam != null ) {
         String lastNumber = lastBatchExam.getCode().substring(3);
-        batchExam.setCode("SSB" + makeAutoGenerateNumberService.numberAutoGen(lastNumber));
+        batchExam.setCode("BEX" + makeAutoGenerateNumberService.numberAutoGen(lastNumber));
       } else {
-        batchExam.setCode("SSB" + makeAutoGenerateNumberService.numberAutoGen(null));
+        batchExam.setCode("BEX" + makeAutoGenerateNumberService.numberAutoGen(null));
       }
     }
 

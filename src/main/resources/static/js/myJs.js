@@ -14,7 +14,7 @@ $(document).ready(function () {
 
 
     /*//--------------- data table short using - data table plugin ------- start //*/
-    if ( $("#myTable tr").length !==0) {
+    if ( $("#myTable").val()) {
         $("#myTable").DataTable({
             "lengthMenu": [[5, 10, 15, 20, -1], [5, 10, 15, 20, "All"]],
             "ordering": false,

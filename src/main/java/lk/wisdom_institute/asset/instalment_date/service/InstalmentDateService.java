@@ -1,16 +1,18 @@
 package lk.wisdom_institute.asset.instalment_date.service;
 
 
-import lk.real_way_institute.asset.instalment_date.dao.InstalmentDateDao;
-import lk.real_way_institute.asset.instalment_date.entity.InstalmentDate;
-import lk.real_way_institute.util.interfaces.AbstractService;
+
+import lk.wisdom_institute.asset.common_asset.model.enums.LiveDead;
+import lk.wisdom_institute.asset.instalment_date.dao.InstalmentDateDao;
+import lk.wisdom_institute.asset.instalment_date.entity.InstalmentDate;
+import lk.wisdom_institute.util.interfaces.AbstractService;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
 
 @Service
-public class InstalmentDateService implements AbstractService< InstalmentDate, Integer > {
+public class InstalmentDateService implements AbstractService<InstalmentDate, Integer > {
   private final InstalmentDateDao intalmentDateDao;
 
   public InstalmentDateService(InstalmentDateDao instalmentDateDao) {
@@ -36,9 +38,9 @@ public class InstalmentDateService implements AbstractService< InstalmentDate, I
   }
 
   public boolean delete(Integer id) {
-//    InstalmentDate intalmentDate = intalmentDateDao.getOne(id);
-//    intalmentDate.setLiveDead(LiveDead.STOP);
-//    intalmentDateDao.save(intalmentDate);
+    InstalmentDate intalmentDate = intalmentDateDao.getOne(id);
+    intalmentDate.setLiveDead(LiveDead.STOP);
+    intalmentDateDao.save(intalmentDate);
     return false;
   }
 

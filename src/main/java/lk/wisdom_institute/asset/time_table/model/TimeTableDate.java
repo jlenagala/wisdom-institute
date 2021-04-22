@@ -1,6 +1,6 @@
 package lk.wisdom_institute.asset.time_table.model;
 
-import lk.real_way_institute.asset.time_table.entity.TimeTable;
+import lk.wisdom_institute.asset.time_table.entity.TimeTable;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

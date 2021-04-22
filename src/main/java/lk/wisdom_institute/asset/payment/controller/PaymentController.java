@@ -194,7 +194,7 @@ public class PaymentController {
     if ( studentDb.getEmail() != null ) {
       String message =
           "Dear " + studentDb.getName() + "\n Your following payment was accepted\n" + paymentInfo + "\n Thanks " +
-              "\n\n Real Way Institute";
+              "\n\n Wisdom Institute";
       try {
         emailService.sendEmail(studentDb.getEmail(), "Payment - Notification", message);
       } catch ( MailException e ) {
@@ -210,10 +210,10 @@ public class PaymentController {
     if ( payment.getId() == null ) {
       Payment lastPayment = paymentService.lastStudentOnDB();
       if ( lastPayment == null ) {
-        payment.setCode("SSP" + makeAutoGenerateNumberService.numberAutoGen(null));
+        payment.setCode("PAY" + makeAutoGenerateNumberService.numberAutoGen(null));
       } else {
         String lastNumber = lastPayment.getCode().substring(3);
-        payment.setCode("SSP" + makeAutoGenerateNumberService.numberAutoGen(lastNumber));
+        payment.setCode("PAY" + makeAutoGenerateNumberService.numberAutoGen(lastNumber));
       }
     }
     return payment;

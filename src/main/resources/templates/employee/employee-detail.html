@@ -2,7 +2,7 @@
 <html lang="en" >
 <head data-th-replace="~{fragments/header :: headerFragment}" >
   <meta charset="UTF-8" >
-  <title >Wisdom student management system </title >
+  <title >Thymeleaf Springboot </title >
 </head >
 <body >
 <nav data-th-replace="~{fragments/navBar :: navBarFragment}" ></nav >
@@ -11,7 +11,7 @@
 <div class="container-fluid  form-Border" >
   <div class="row text-center formManagement border-info" >
     <div class="col" >
-      <a class="btn btn-primary" href="/home" >&nbsp; Bfdsfack To Home
+      <a class="btn btn-primary" href="/home" >&nbsp; Back To Home
       </a >
     </div >
 
@@ -22,7 +22,7 @@
   </div >
   <div >
     <div class="col" >
-      <h4 class="text-info text-center" >
+      <h4 class="text-primary text-center" >
         <strong >
           <span data-th-text="${employeeDetail.title.title} +${' '} +${employeeDetail.name}" ></span >
         </strong >
