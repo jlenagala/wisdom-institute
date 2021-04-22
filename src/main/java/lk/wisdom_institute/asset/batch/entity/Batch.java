@@ -65,8 +65,7 @@ public class Batch extends AuditEntity {
   private List< BatchExam > batchExams;
 
   @ManyToMany(fetch = FetchType.EAGER)
-  @JoinTable(name = "batch_subject",
-      joinColumns = @JoinColumn(name = "batch_id"),
+  @JoinTable(name = "batch_subject", joinColumns = @JoinColumn(name = "batch_id"),
       inverseJoinColumns = @JoinColumn(name = "subject_id"))
   private List< Subject > subjects;
 

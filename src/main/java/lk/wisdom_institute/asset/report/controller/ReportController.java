@@ -1,12 +1,14 @@
 package lk.wisdom_institute.asset.report.controller;
 
 import lk.wisdom_institute.asset.batch.entity.Batch;
+import lk.wisdom_institute.asset.batch.entity.enums.Grade;
 import lk.wisdom_institute.asset.batch.service.BatchService;
 import lk.wisdom_institute.asset.batch_exam.entity.BatchExam;
 import lk.wisdom_institute.asset.batch_exam.service.BatchExamService;
 import lk.wisdom_institute.asset.batch_student_exam_result.entity.BatchStudentExamResult;
 import lk.wisdom_institute.asset.common_asset.model.TwoDate;
 import lk.wisdom_institute.asset.common_asset.model.enums.AttendanceStatus;
+import lk.wisdom_institute.asset.common_asset.model.enums.LiveDead;
 import lk.wisdom_institute.asset.common_asset.model.enums.ResultGrade;
 import lk.wisdom_institute.asset.payment.entity.Payment;
 import lk.wisdom_institute.asset.payment.service.PaymentService;
@@ -291,5 +293,24 @@ public class ReportController {
     model.addAttribute("message", message);
     model.addAttribute("batchExams", batchExamService.findAll());
     return "report/batchExamReport";
+  }
+
+  @GetMapping("/test")
+  public String findAll(Model model) {
+
+    List<Student> studentList=new ArrayList<>();
+    List<Batch> batchList=batchService.findAll().stream().filter(x -> x.getGrade().equals(Grade.GRADE_6))
+            .collect(Collectors.toList());
+    for (Batch batch : batchList) {
+      batch.getBatchStudents().forEach(x->{
+       studentList.add( studentService.findById(x.getId()));
+      });
+    }
+    model.addAttribute("students",studentList
+            .stream()
+            .filter(x -> x.getLiveDead().equals(LiveDead.ACTIVE))
+            .collect(Collectors.toList()));
+    model.addAttribute("studentRemoveBatch", false);
+    return "student/student";
   }
 }

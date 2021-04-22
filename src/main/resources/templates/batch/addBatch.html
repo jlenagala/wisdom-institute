@@ -135,13 +135,13 @@
     <!--batch name-->
     <div class="form-group">
       <div class="row">
-        <div class="col-6" data-th-if="${addStatus==false}">
+        <div class="col-6" data-th-if="${addStatus==true}">
           <div class="form-group">
             <label data-th-for="${name}" class="control-label col-4">Enter Name :</label>
             <div class="">
               <input type="text" id="enterName" placeholder="Batch Name"
                      class="form-control"
-                     autofocus readonly>
+                     autofocus>
             </div>
           </div>
         </div>
@@ -491,22 +491,22 @@
   }
 
 
-  $("#year,#grade. #subjects").change(function () {
+  $("#year,#grade,#employee").change(function () {
      makeName();
   });
 
-  $("#nameBatch").keyup(function () {
+  $("#enterName").keyup(function () {
       makeName();
   })
 
   function makeName(){
-      let year = $("#year").val();
-      let grade = $(`#grade`).val();
-      let subject = $("#subjects").val();
+      let year = $("#year :selected").text();
+      let grade = $(`#grade :selected`).text();
+      let employee = $("#employee :selected").text();
       let enterName = $("#enterName").val();
 
-      if (year && enterName && grade && subject) {
-          $("#nameBatch").val(`${year}-${grade}-${subject}-${enterName}`);
+      if (year && enterName && grade && employee) {
+          $("#nameBatch").val(`${enterName}-${year}-${grade}-${employee}`);
       }
   }
 
