@@ -135,7 +135,16 @@
     <!--batch name-->
     <div class="form-group">
       <div class="row">
-
+        <div class="col-6" data-th-if="${addStatus==false}">
+          <div class="form-group">
+            <label data-th-for="${name}" class="control-label col-4">Enter Name :</label>
+            <div class="">
+              <input type="text" id="enterName" placeholder="Batch Name"
+                     class="form-control"
+                     autofocus readonly>
+            </div>
+          </div>
+        </div>
         <div data-th-class="${addStatus==false?'col-12':'col-6'}">
           <div class="form-group">
             <label data-th-for="${name}" class="control-label col-4">Batch Name :</label>
@@ -318,15 +327,6 @@
     $("#instalmentCount").prop('readonly', true);
   });
 
-  $("#year,#grade").change(function () {
-    let year = $("#year").val();
-    let enterName = $(`#grade`).val();
-
-    if (year && employee && grade) {
-      $("#nameBatch").val(`${year}-${enterName}`);
-    }
-  });
-
   $("#startDate").change(function () {
     if ($(this).val()) {
       $("#instalmentCount").prop('readonly', false);
@@ -489,6 +489,27 @@
     $(removeRow).remove();
 
   }
+
+
+  $("#year,#grade. #subjects").change(function () {
+     makeName();
+  });
+
+  $("#nameBatch").keyup(function () {
+      makeName();
+  })
+
+  function makeName(){
+      let year = $("#year").val();
+      let grade = $(`#grade`).val();
+      let subject = $("#subjects").val();
+      let enterName = $("#enterName").val();
+
+      if (year && enterName && grade && subject) {
+          $("#nameBatch").val(`${year}-${grade}-${subject}-${enterName}`);
+      }
+  }
+
 </script>
 </body>
 </html>
