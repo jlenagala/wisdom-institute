@@ -1,7 +1,6 @@
 package lk.wisdom_institute.asset.batch_student_exam_result.entity;
 
 import com.fasterxml.jackson.annotation.JsonFilter;
-
 import lk.wisdom_institute.asset.batch_exam.entity.BatchExam;
 import lk.wisdom_institute.asset.batch_student.entity.BatchStudent;
 import lk.wisdom_institute.asset.common_asset.model.enums.AttendanceStatus;

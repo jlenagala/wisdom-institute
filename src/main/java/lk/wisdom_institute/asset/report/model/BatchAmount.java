@@ -1,6 +1,6 @@
 package lk.wisdom_institute.asset.report.model;
 
-import lk.wisdom_institute.asset.batch.entity.Batch;
+import lk.real_way_institute.asset.batch.entity.Batch;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

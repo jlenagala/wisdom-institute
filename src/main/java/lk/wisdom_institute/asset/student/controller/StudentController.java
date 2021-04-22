@@ -19,6 +19,7 @@ import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBui
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -54,10 +55,10 @@ public class StudentController implements AbstractController< Student, Integer >
     model.addAttribute("student", student);
     model.addAttribute("addStatus", addStatus);
     model.addAttribute("liveDeads", LiveDead.values());
+    List< Batch > batches = batchService.findAll().stream().filter(x->x.getEndAt().isAfter(LocalDate.now())).collect(Collectors.toList());
     if ( student.getBatchStudents() == null ) {
-      model.addAttribute("batches", batchService.findAll());
+      model.addAttribute("batches", batches);
     } else {
-      List< Batch > batches = batchService.findAll();
       student.getBatchStudents().forEach(x -> batches.remove(x.getBatch()));
       model.addAttribute("batches", batches);
     }
@@ -102,15 +103,17 @@ public class StudentController implements AbstractController< Student, Integer >
       Student lastStudent = studentService.lastStudentOnDB();
       if ( lastStudent != null ) {
         String lastNumber = lastStudent.getRegNo().substring(3);
-        student.setRegNo("STU" + makeAutoGenerateNumberService.numberAutoGen(lastNumber));
+        student.setRegNo("SSS" + makeAutoGenerateNumberService.numberAutoGen(lastNumber));
       } else {
-        student.setRegNo("STU" + makeAutoGenerateNumberService.numberAutoGen(null));
+        student.setRegNo("SSS" + makeAutoGenerateNumberService.numberAutoGen(null));
       }
     }
     studentService.persist(student);
     student.getBatchStudents().forEach(x -> {
-      x.setStudent(student);
-      batchStudentService.persist(x);
+      if ( x.getBatch() != null && x.getStudent() == null ) {
+        x.setStudent(student);
+        batchStudentService.persist(x);
+      }
     });
     return "redirect:/student";
 

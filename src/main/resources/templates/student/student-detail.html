@@ -13,7 +13,7 @@
 
 <div class="row text-center" >
   <div class="col-4" >
-    <a href="/student" >
+    <a href="/student" data-sec-authorize="hasAnyAuthority('ROLE_MANAGER','ROLE_CASHIER','ROLE_SECTION_HEAD')">
       <button class="btn btn-primary" >All Student</button >
     </a >
   </div >
@@ -22,10 +22,15 @@
   </div >
   <div class="col-4" >
     <a href="/student/add" >
-      <button class="btn btn-primary" >Add new Student</button >
+      <button class="btn btn-primary" data-sec-authorize="hasAnyAuthority('ROLE_MANAGER','ROLE_CASHIER','ROLE_SECTION_HEAD')">Add new Student</button >
     </a >
   </div >
 </div >
+<div class="container" data-sec-authorize="hasAnyAuthority('ROLE_STUDENT')">
+  <div class="alert alert-primary text-center" role="alert" >
+    <strong >If there is some miss match information please contact management</strong >
+  </div >
+</div>
 <!--Student detail-->
 <div class="container" >
   <div class="row" data-th-fragment="studentDetailsFragment" >

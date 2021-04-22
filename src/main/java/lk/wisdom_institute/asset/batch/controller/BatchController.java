@@ -4,10 +4,7 @@ package lk.wisdom_institute.asset.batch.controller;
 import com.fasterxml.jackson.databind.ser.FilterProvider;
 import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
 import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
-
 import lk.wisdom_institute.asset.batch.entity.Batch;
-import lk.wisdom_institute.asset.batch.entity.enums.ClassDay;
-import lk.wisdom_institute.asset.batch.entity.enums.Grade;
 import lk.wisdom_institute.asset.batch.service.BatchService;
 import lk.wisdom_institute.asset.batch_student.service.BatchStudentService;
 import lk.wisdom_institute.asset.common_asset.model.enums.LiveDead;
@@ -43,7 +40,8 @@ public class BatchController implements AbstractController< Batch, Integer > {
 
   public BatchController(BatchService batchService, EmployeeService employeeService,
                          MakeAutoGenerateNumberService makeAutoGenerateNumberService,
-                         SubjectService subjectService, StudentService studentService, BatchStudentService batchStudentService) {
+                         SubjectService subjectService, StudentService studentService,
+                         BatchStudentService batchStudentService) {
     this.batchService = batchService;
     this.employeeService = employeeService;
     this.makeAutoGenerateNumberService = makeAutoGenerateNumberService;
@@ -57,19 +55,24 @@ public class BatchController implements AbstractController< Batch, Integer > {
   public String findAll(Model model) {
     model.addAttribute("batches",
                        batchService.findAll());
+    //    valid batch witharak pennana kiwwoth line number 63 idala 66 ta un comment karanna
+    //    itapasse line number 60-61 comment karanna
+    /*
+    model.addAttribute("batches",
+                       batchService.findAll().stream().filter(x->x.getEndAt().isAfter(LocalDate.now())).collect(Collectors.toList()));
+    */
+
     return "batch/batch";
   }
 
   private String commonMethod(Model model, Batch batch, boolean addStatus) {
-    model.addAttribute("employees",employeeService.findByDesignation(Designation.INSTRUCTOR));
-    model.addAttribute("grades", Grade.values());
-    model.addAttribute("classDays", ClassDay.values());
+    model.addAttribute("employees", employeeService.findByDesignation(Designation.INSTRUCTOR));
     model.addAttribute("batch", batch);
     model.addAttribute("addStatus", addStatus);
     model.addAttribute("liveDeads", LiveDead.values());
-    if ( batch.getSubjects()==null ){
-    model.addAttribute("subjects", subjectService.findAll());
-    }else {
+    if ( batch.getSubjects() == null ) {
+      model.addAttribute("subjects", subjectService.findAll());
+    } else {
       List< Subject > subjects = subjectService.findAll();
       batch.getSubjects().forEach(subjects::remove);
       model.addAttribute("subjects", subjects);
@@ -117,13 +120,13 @@ public class BatchController implements AbstractController< Batch, Integer > {
       Batch lastBatch = batchService.lastBatchOnDB();
       if ( lastBatch != null ) {
         String lastNumber = lastBatch.getCode().substring(3);
-        batch.setCode("BAT" + makeAutoGenerateNumberService.numberAutoGen(lastNumber));
+        batch.setCode("RWB" + makeAutoGenerateNumberService.numberAutoGen(lastNumber));
       } else {
-        batch.setCode("BAT" + makeAutoGenerateNumberService.numberAutoGen(null));
+        batch.setCode("RWB" + makeAutoGenerateNumberService.numberAutoGen(null));
       }
     }
 
-    if ( batch.getInstalmentDates()!= null ) {
+    if ( batch.getInstalmentDates() != null ) {
       List< InstalmentDate > instalmentDates = new ArrayList<>();
       batch.getInstalmentDates().forEach(x -> {
         x.setBatch(batch);

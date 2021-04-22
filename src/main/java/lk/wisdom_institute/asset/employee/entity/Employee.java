@@ -1,7 +1,6 @@
 package lk.wisdom_institute.asset.employee.entity;
 
 import com.fasterxml.jackson.annotation.JsonFilter;
-
 import lk.wisdom_institute.asset.batch.entity.Batch;
 import lk.wisdom_institute.asset.common_asset.model.FileInfo;
 import lk.wisdom_institute.asset.common_asset.model.enums.CivilStatus;

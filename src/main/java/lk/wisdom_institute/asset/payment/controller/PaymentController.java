@@ -6,11 +6,14 @@ import lk.wisdom_institute.asset.batch_student.service.BatchStudentService;
 import lk.wisdom_institute.asset.common_asset.model.TwoDate;
 import lk.wisdom_institute.asset.common_asset.model.enums.LiveDead;
 import lk.wisdom_institute.asset.instalment_date.entity.InstalmentDate;
+import lk.wisdom_institute.asset.instalment_date.service.InstalmentDateService;
 import lk.wisdom_institute.asset.payment.entity.Payment;
 import lk.wisdom_institute.asset.payment.entity.enums.PaymentStatus;
+import lk.wisdom_institute.asset.payment.model.BatchStudentInstalmentDate;
+import lk.wisdom_institute.asset.payment.model.PaymentRemainder;
+import lk.wisdom_institute.asset.payment.model.PaymentRemainderMessage;
 import lk.wisdom_institute.asset.payment.service.PaymentService;
 import lk.wisdom_institute.asset.student.entity.Student;
-import lk.wisdom_institute.asset.instalment_date.service.InstalmentDateService;
 import lk.wisdom_institute.asset.student.service.StudentService;
 import lk.wisdom_institute.util.service.DateTimeAgeService;
 import lk.wisdom_institute.util.service.EmailService;
@@ -25,6 +28,8 @@ import javax.validation.Valid;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -205,10 +210,10 @@ public class PaymentController {
     if ( payment.getId() == null ) {
       Payment lastPayment = paymentService.lastStudentOnDB();
       if ( lastPayment == null ) {
-        payment.setCode("PAY" + makeAutoGenerateNumberService.numberAutoGen(null));
+        payment.setCode("SSP" + makeAutoGenerateNumberService.numberAutoGen(null));
       } else {
         String lastNumber = lastPayment.getCode().substring(3);
-        payment.setCode("PAY" + makeAutoGenerateNumberService.numberAutoGen(lastNumber));
+        payment.setCode("SSP" + makeAutoGenerateNumberService.numberAutoGen(lastNumber));
       }
     }
     return payment;
@@ -218,5 +223,64 @@ public class PaymentController {
   public String delete(@PathVariable Integer id, Model model) {
     paymentService.delete(id);
     return "redirect:/payment";
+  }
+
+
+  @GetMapping( "/message" )
+  public String messageForm(Model model) {
+    List< InstalmentDate > instalmentDates = instalmentDateService.findByDateBefore(LocalDate.now());
+    List< BatchStudentInstalmentDate > notBatchStudentInstalmentDates = new ArrayList<>();
+
+    instalmentDates.forEach(x -> {
+      List< BatchStudent > batchStudents = x.getBatch().getBatchStudents();
+      for ( BatchStudent batchStudent : batchStudents ) {
+        if ( paymentService.findByInstalmentDateAndBatchStudent(x, batchStudent) == null ) {
+          BatchStudentInstalmentDate batchStudentInstalmentDate = new BatchStudentInstalmentDate();
+          batchStudentInstalmentDate.setBatchStudent(batchStudentService.findById(batchStudent.getId()));
+          batchStudentInstalmentDate.setInstalmentDate(instalmentDateService.findById(x.getId()));
+          notBatchStudentInstalmentDates.add(batchStudentInstalmentDate);
+        }
+      }
+    });
+
+    Collections.sort(notBatchStudentInstalmentDates, BatchStudentComparator);
+
+
+    model.addAttribute("notBatchStudentInstalmentDates", notBatchStudentInstalmentDates);
+    return "payment/paymentMessage";
+  }
+
+  private Comparator< BatchStudentInstalmentDate > BatchStudentComparator =
+      new Comparator< BatchStudentInstalmentDate >() {
+
+    public int compare(BatchStudentInstalmentDate s1, BatchStudentInstalmentDate s2) {
+      String StudentName1 = s1.getBatchStudent().getStudent().getName().toUpperCase();
+      String StudentName2 = s2.getBatchStudent().getStudent().getName().toUpperCase();
+
+      //ascending order
+      return StudentName1.compareTo(StudentName2);
+
+      //descending order
+      //return StudentName2.compareTo(StudentName1);
+    }
+  };
+
+  @PostMapping( "/message" )
+  public String sendMessage(@ModelAttribute PaymentRemainderMessage paymentRemainderMessage) {
+
+    for ( PaymentRemainder paymentRemainder : paymentRemainderMessage.getPaymentRemainders() ) {
+      System.out.println(paymentRemainder.toString());
+      Student student = studentService.findById(paymentRemainder.getStudent().getId());
+
+      String message =
+          "Dear " + student.getName() + "\n According to following batch \n\t\t\t\t" + paymentRemainder.getBatchName() + "\n \t\t\t Payment Date and Amount " + paymentRemainder.getDate() + " and " + paymentRemainder.getAmount() + "\n\n\t\t" + paymentRemainder.getMessage() + " \n\n Thanks";
+
+      if ( student.getEmail() != null ) {
+        emailService.sendEmail(student.getEmail(), "Payment Remainder", message);
+      }
+
+    }
+
+    return "redirect:/home";
   }
 }
