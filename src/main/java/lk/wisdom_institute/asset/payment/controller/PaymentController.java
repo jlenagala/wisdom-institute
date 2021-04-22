@@ -184,9 +184,16 @@ public class PaymentController {
 
     StringBuilder paymentInfo = new StringBuilder();
     for ( Payment payment : withBatchStudent ) {
-      paymentInfo.append("\n\t\t\t\t Payment Code \t\t").append(payment.getCode()).append("\t\t\t\t Instalment Amount" +
-                                                                                              " \t\t").append(payment.getInstalmentDate().getAmount()).append(
-          " and you paid. \t\t\t\t Amount \t\t ").append(payment.getAmount()).append("\t\t\t\t Paid At \t\t").append(payment.getCreatedAt().toLocalDate()).append(" \t\t\t\tCreated By\t\t").append(payment.getCreatedBy());
+      paymentInfo
+          .append("\n\t\t\t\t Payment Code \t\t")
+          .append(payment.getCode()).append("\t\t\t\t Instalment Amount" + " \t\t")
+          .append(payment.getAmount())
+          .append(" and you paid. \t\t\t\t Amount \t\t ")
+          .append(payment.getAmount())
+          .append("\t\t\t\t Paid At \t\t")
+          .append(payment.getCreatedAt().toLocalDate())
+          .append(" \t\t\t\tCreated By\t\t")
+          .append(payment.getCreatedBy());
     }
 
 
@@ -253,17 +260,17 @@ public class PaymentController {
   private Comparator< BatchStudentInstalmentDate > BatchStudentComparator =
       new Comparator< BatchStudentInstalmentDate >() {
 
-    public int compare(BatchStudentInstalmentDate s1, BatchStudentInstalmentDate s2) {
-      String StudentName1 = s1.getBatchStudent().getStudent().getName().toUpperCase();
-      String StudentName2 = s2.getBatchStudent().getStudent().getName().toUpperCase();
+        public int compare(BatchStudentInstalmentDate s1, BatchStudentInstalmentDate s2) {
+          String StudentName1 = s1.getBatchStudent().getStudent().getName().toUpperCase();
+          String StudentName2 = s2.getBatchStudent().getStudent().getName().toUpperCase();
 
-      //ascending order
-      return StudentName1.compareTo(StudentName2);
+          //ascending order
+          return StudentName1.compareTo(StudentName2);
 
-      //descending order
-      //return StudentName2.compareTo(StudentName1);
-    }
-  };
+          //descending order
+          //return StudentName2.compareTo(StudentName1);
+        }
+      };
 
   @PostMapping( "/message" )
   public String sendMessage(@ModelAttribute PaymentRemainderMessage paymentRemainderMessage) {
