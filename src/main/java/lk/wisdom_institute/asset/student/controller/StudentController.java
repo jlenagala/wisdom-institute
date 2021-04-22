@@ -102,9 +102,9 @@ public class StudentController implements AbstractController< Student, Integer >
       Student lastStudent = studentService.lastStudentOnDB();
       if ( lastStudent != null ) {
         String lastNumber = lastStudent.getRegNo().substring(3);
-        student.setRegNo("SSS" + makeAutoGenerateNumberService.numberAutoGen(lastNumber));
+        student.setRegNo("STU" + makeAutoGenerateNumberService.numberAutoGen(lastNumber));
       } else {
-        student.setRegNo("SSS" + makeAutoGenerateNumberService.numberAutoGen(null));
+        student.setRegNo("STU" + makeAutoGenerateNumberService.numberAutoGen(null));
       }
     }
     studentService.persist(student);

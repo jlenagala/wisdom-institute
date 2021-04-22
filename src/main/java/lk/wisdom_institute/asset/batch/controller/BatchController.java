@@ -117,9 +117,9 @@ public class BatchController implements AbstractController< Batch, Integer > {
       Batch lastBatch = batchService.lastBatchOnDB();
       if ( lastBatch != null ) {
         String lastNumber = lastBatch.getCode().substring(3);
-        batch.setCode("RWB" + makeAutoGenerateNumberService.numberAutoGen(lastNumber));
+        batch.setCode("BAT" + makeAutoGenerateNumberService.numberAutoGen(lastNumber));
       } else {
-        batch.setCode("RWB" + makeAutoGenerateNumberService.numberAutoGen(null));
+        batch.setCode("BAT" + makeAutoGenerateNumberService.numberAutoGen(null));
       }
     }
 
