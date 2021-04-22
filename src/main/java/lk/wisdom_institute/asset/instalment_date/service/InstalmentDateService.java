@@ -4,6 +4,7 @@ package lk.wisdom_institute.asset.instalment_date.service;
 import lk.real_way_institute.asset.instalment_date.dao.InstalmentDateDao;
 import lk.real_way_institute.asset.instalment_date.entity.InstalmentDate;
 import lk.real_way_institute.util.interfaces.AbstractService;
+import lk.wisdom_institute.asset.common_asset.model.enums.LiveDead;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -31,14 +32,16 @@ public class InstalmentDateService implements AbstractService< InstalmentDate, I
   }
 
   public InstalmentDate persist(InstalmentDate instalmentDate) {
-
+if ( instalmentDate.getId() ==null ){
+  instalmentDate.setLiveDead(LiveDead.ACTIVE);
+}
     return intalmentDateDao.save(instalmentDate);
   }
 
   public boolean delete(Integer id) {
-//    InstalmentDate intalmentDate = intalmentDateDao.getOne(id);
-//    intalmentDate.setLiveDead(LiveDead.STOP);
-//    intalmentDateDao.save(intalmentDate);
+    InstalmentDate intalmentDate = intalmentDateDao.getOne(id);
+    intalmentDate.setLiveDead(LiveDead.STOP);
+    intalmentDateDao.save(intalmentDate);
     return false;
   }
 
