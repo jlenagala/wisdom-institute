@@ -93,16 +93,16 @@ body {
 }
 
 .tile.job .header {
-    background: linear-gradient(to bottom right, #609931, #87bc27);
+    background: linear-gradient(to bottom right, #bbcbf0, #6185fa);
 }
 
 .tile.job  .body {
-    color: #609931;
+    color: #6185fa;
 }
 
 .tile.job .body :hover{
     color:white;
-    background-color:#609931;
+    background-color:#6185fa;
 }
 
 .tile.resource .header {
@@ -135,10 +135,10 @@ body {
 }
 
 .tile.invoice  .body {
-    color: #0aa361;
+    color: #6185fa;
 }
 
 .tile.invoice  .body :hover{
     color:white;
-    background-color:#0aa361;
+    background-color:#6185fa;
 }

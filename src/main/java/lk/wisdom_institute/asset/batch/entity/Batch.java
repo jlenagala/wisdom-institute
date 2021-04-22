@@ -2,6 +2,9 @@ package lk.wisdom_institute.asset.batch.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonFilter;
+
+import lk.wisdom_institute.asset.batch.entity.enums.ClassDay;
+import lk.wisdom_institute.asset.batch.entity.enums.Grade;
 import lk.wisdom_institute.asset.batch_exam.entity.BatchExam;
 import lk.wisdom_institute.asset.batch_student.entity.BatchStudent;
 import lk.wisdom_institute.asset.common_asset.model.enums.LiveDead;
@@ -66,7 +69,10 @@ public class Batch extends AuditEntity {
       joinColumns = @JoinColumn(name = "batch_id"),
       inverseJoinColumns = @JoinColumn(name = "subject_id"))
   private List< Subject > subjects;
-
+  @Enumerated( EnumType.STRING )
+  private Grade grade;
+  @Enumerated( EnumType.STRING )
+  private ClassDay classDay;
 
   @Transient
   private int count;
