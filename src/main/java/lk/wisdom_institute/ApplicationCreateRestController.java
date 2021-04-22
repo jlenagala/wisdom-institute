@@ -1,11 +1,12 @@
 package lk.wisdom_institute;
 
-import lk.wisdom_institute.asset.common_asset.model.Enum.BloodGroup;
-import lk.wisdom_institute.asset.common_asset.model.Enum.CivilStatus;
-import lk.wisdom_institute.asset.common_asset.model.Enum.Gender;
-import lk.wisdom_institute.asset.common_asset.model.Enum.Title;
+
+import lk.wisdom_institute.asset.common_asset.model.enums.CivilStatus;
+import lk.wisdom_institute.asset.common_asset.model.enums.Gender;
+import lk.wisdom_institute.asset.common_asset.model.enums.Title;
 import lk.wisdom_institute.asset.employee.entity.Employee;
-import lk.wisdom_institute.asset.employee.entity.Enum.EmployeeStatus;
+import lk.wisdom_institute.asset.employee.entity.enums.Designation;
+import lk.wisdom_institute.asset.employee.entity.enums.EmployeeStatus;
 import lk.wisdom_institute.asset.employee.service.EmployeeService;
 import lk.wisdom_institute.asset.user_management.entity.Role;
 import lk.wisdom_institute.asset.user_management.entity.User;
@@ -36,7 +37,7 @@ public class ApplicationCreateRestController {
     @GetMapping( "/select/user" )
     public String saveUser() {
         //roles list start
-        String[] roles = {"ADMIN"};
+        String[] roles = {"ADMIN", "STUDENT","MANAGER","CASHIER","SECTION_HEAD"};
         for ( String s : roles ) {
             Role role = new Role();
             role.setRoleName(s);
@@ -45,15 +46,13 @@ public class ApplicationCreateRestController {
 
 //Employee
         Employee employee = new Employee();
-        employee.setPayRoleNumber("11111111");
         employee.setName("Admin User");
         employee.setCallingName("Admin");
         employee.setName("908670000V");
         employee.setMobileOne("0750000000");
         employee.setTitle(Title.DR);
         employee.setGender(Gender.MALE);
-        employee.setBloodGroup(BloodGroup.AP);
-//        employee.setDesignation(Designation.ED);
+        employee.setDesignation(Designation.CASHIER);
         employee.setCivilStatus(CivilStatus.UNMARRIED);
         employee.setEmployeeStatus(EmployeeStatus.WORKING);
         employee.setDateOfBirth(LocalDate.now().minusYears(18));

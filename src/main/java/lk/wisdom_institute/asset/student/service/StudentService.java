@@ -1,9 +1,12 @@
 package lk.wisdom_institute.asset.student.service;
 
 
+import lk.wisdom_institute.asset.common_asset.model.enums.LiveDead;
 import lk.wisdom_institute.asset.student.dao.StudentDao;
 import lk.wisdom_institute.asset.student.entity.Student;
 import lk.wisdom_institute.util.interfaces.AbstractService;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,20 +28,31 @@ public class StudentService implements AbstractService< Student, Integer > {
     }
 
     public Student persist(Student student) {
+        if(student.getId()==null){
+            student.setLiveDead(LiveDead.ACTIVE);
+        }
         return studentDao.save(student);
     }
 
     public boolean delete(Integer id) {
-        studentDao.deleteById(id);
+      Student student = studentDao.getOne(id);
+      student.setLiveDead(LiveDead.STOP);
+      studentDao.save(student);
         return false;
     }
 
     public List< Student > search(Student student) {
-        return null;
+        ExampleMatcher matcher = ExampleMatcher
+            .matching()
+            .withIgnoreCase()
+            .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
+        Example< Student > studentExample = Example.of(student, matcher);
+        return studentDao.findAll(studentExample);
     }
 
     public Student lastStudentOnDB() {
         return studentDao.findFirstByOrderByIdDesc();
     }
+
 
 }

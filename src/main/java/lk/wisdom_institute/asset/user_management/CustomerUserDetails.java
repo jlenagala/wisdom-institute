@@ -1,5 +1,6 @@
 package lk.wisdom_institute.asset.user_management;
 
+
 import lk.wisdom_institute.asset.user_management.entity.User;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

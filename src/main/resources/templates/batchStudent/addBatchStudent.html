@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" >
+<!--Styles, meta data, and title are included-->
+<head data-th-replace="~{fragments/header :: headerFragment}" >
+  <meta charset="UTF-8" >
+  <title >Success Student Management </title >
+</head >
+<body >
+<link data-th-href="@{/css/multi-select.css}" media="all" rel="stylesheet" type="text/css" />
+<link data-th-href="@{/css/studentAddCss.css}" media="all" rel="stylesheet" type="text/css" />
+
+
+<!--Nav bar is included-->
+<nav data-th-replace="~{fragments/navBar :: navBarFragment}" ></nav >
+
+<div class="row bg-light" >
+  <div class="col-4" >
+  </div >
+  <div class="col-4" >
+    <h1 >Students On batch and New Student Add</h1 >
+  </div >
+  <div class="col-4" >
+    <a href="/student" >
+      <button class="btn btn-primary" >Add a Student</button >
+    </a >
+  </div >
+</div >
+
+<div class="container-fluid" >
+  <div class="container-fluid" >
+    <div data-th-replace="~{batch/batch-detail :: batchDetailsFragment}" ></div >
+  </div >
+  <div class="container-fluid" >
+    <div data-th-replace="~{teacher/teacher-detail :: teacherDetail}" ></div >
+  </div >
+
+
+  <div class="row container" >
+    <div class="col-sm-2 col-sm-offset-2" >
+      <a href="/batchStudent" >
+        <button type="button" class="btn btn-danger btn-block" >Back</button >
+      </a >
+    </div >
+
+  </div >
+
+  <div class="container-fluid" >
+    <div data-th-replace="~{student/student :: studentsFragment}" ></div >
+  </div >
+</div >
+<!--footer is included-->
+<div data-th-replace="~{fragments/footer :: footerFragment}" ></div >
+<!--script is included-->
+<div data-th-replace="~{fragments/script :: scriptFragment}" ></div >
+
+<!--custom javascript-->
+<script data-th-src="@{/js/jquery.multi-select.js}" ></script >
+
+
+</body >
+</html >

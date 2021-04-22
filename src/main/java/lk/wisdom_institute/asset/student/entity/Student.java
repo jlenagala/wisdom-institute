@@ -2,9 +2,9 @@ package lk.wisdom_institute.asset.student.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonFilter;
-import lk.wisdom_institute.asset.batch.entity.Batch;
-import lk.wisdom_institute.asset.school.entity.School;
-import lk.wisdom_institute.asset.subject.entity.Subject;
+import lk.wisdom_institute.asset.batch_student.entity.BatchStudent;
+import lk.wisdom_institute.asset.common_asset.model.enums.Gender;
+import lk.wisdom_institute.asset.common_asset.model.enums.LiveDead;
 import lk.wisdom_institute.util.audit.AuditEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,40 +24,35 @@ import java.util.List;
 @JsonFilter( "Student" )
 public class Student extends AuditEntity {
 
-    private String regNo;
+  private String regNo;
 
-    private String firstName;
+  private String name;
 
-    private String lastName;
+  @Column(unique = true)
+  private String nic;
 
-    private String gender;
+  @Enumerated( EnumType.STRING )
+  private Gender gender;
 
-    @DateTimeFormat( pattern = "yyyy-MM-dd" )
-    private LocalDate dob;
+  @DateTimeFormat( pattern = "yyyy-MM-dd" )
+  private LocalDate dob;
 
-    private String address;
+  private String address;
 
-    private String city;
 
-    private String guardian;
+  private String mobile;
 
-    private String mobile;
+  private String home;
 
-    private String home;
+  @Column( unique = true )
+  private String email;
 
-    // TODO: 6/13/2020  add the student picture
-    /*One particular batch*/
-    @ManyToOne
-    private Batch batch;
+  @Enumerated( EnumType.STRING )
+  private LiveDead liveDead;
 
-    @ManyToOne
-    private School school;
 
-    @ManyToMany
-    @JoinTable( name = "student_subject",
-            joinColumns = @JoinColumn( name = "student_id" ),
-            inverseJoinColumns = @JoinColumn( name = "subject_id" ) )
-    private List< Subject > subjects;
+  @OneToMany(mappedBy = "student",cascade ={ CascadeType.MERGE, CascadeType.PERSIST})
+  private List< BatchStudent > batchStudents;
 
 
 }

@@ -2,6 +2,7 @@ package lk.wisdom_institute.asset.user_management.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lk.wisdom_institute.asset.employee.entity.Employee;
+import lk.wisdom_institute.asset.student.entity.Student;
 import lk.wisdom_institute.util.audit.AuditEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,7 +12,6 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.List;
 
@@ -24,8 +24,10 @@ import java.util.List;
 public class User extends AuditEntity {
 
     @OneToOne
-    @NotNull
     private Employee employee;
+
+    @OneToOne
+    private Student student;
 
     @Column(nullable = false,unique = true)
     @Size(min = 5, message = "user name should include at least five characters")
@@ -48,14 +50,5 @@ public class User extends AuditEntity {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private List<Role> roles;
 
-
-
-
-    /*@ManyToMany(fetch = FetchType.EAGER)
-    //@Fetch( FetchMode.SUBSELECT)
-    @JoinTable(name = "user_working_place",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "working_place_id"))
-    private Set< WorkingPlace > workingPlaces;*/
 
 }

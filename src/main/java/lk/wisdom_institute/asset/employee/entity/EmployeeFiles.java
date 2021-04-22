@@ -1,6 +1,7 @@
 package lk.wisdom_institute.asset.employee.entity;
 
 
+
 import lk.wisdom_institute.util.audit.AuditEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
