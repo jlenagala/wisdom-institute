@@ -5,6 +5,8 @@ import com.fasterxml.jackson.databind.ser.FilterProvider;
 import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
 import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
 import lk.wisdom_institute.asset.batch.entity.Batch;
+import lk.wisdom_institute.asset.batch.entity.enums.ClassDay;
+import lk.wisdom_institute.asset.batch.entity.enums.Grade;
 import lk.wisdom_institute.asset.batch.service.BatchService;
 import lk.wisdom_institute.asset.batch_student.service.BatchStudentService;
 import lk.wisdom_institute.asset.common_asset.model.enums.LiveDead;
@@ -66,6 +68,8 @@ public class BatchController implements AbstractController< Batch, Integer > {
   }
 
   private String commonMethod(Model model, Batch batch, boolean addStatus) {
+    model.addAttribute("grades", Grade.values());
+    model.addAttribute("classDays", ClassDay.values());
     model.addAttribute("employees", employeeService.findByDesignation(Designation.INSTRUCTOR));
     model.addAttribute("batch", batch);
     model.addAttribute("addStatus", addStatus);
@@ -120,9 +124,9 @@ public class BatchController implements AbstractController< Batch, Integer > {
       Batch lastBatch = batchService.lastBatchOnDB();
       if ( lastBatch != null ) {
         String lastNumber = lastBatch.getCode().substring(3);
-        batch.setCode("RWB" + makeAutoGenerateNumberService.numberAutoGen(lastNumber));
+        batch.setCode("BAT" + makeAutoGenerateNumberService.numberAutoGen(lastNumber));
       } else {
-        batch.setCode("RWB" + makeAutoGenerateNumberService.numberAutoGen(null));
+        batch.setCode("BAT" + makeAutoGenerateNumberService.numberAutoGen(null));
       }
     }
 

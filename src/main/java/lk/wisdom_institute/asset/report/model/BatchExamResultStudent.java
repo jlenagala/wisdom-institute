@@ -1,8 +1,9 @@
 package lk.wisdom_institute.asset.report.model;
 
-import lk.real_way_institute.asset.batch.entity.Batch;
-import lk.real_way_institute.asset.batch_exam.entity.BatchExam;
-import lk.real_way_institute.asset.student.entity.Student;
+
+import lk.wisdom_institute.asset.batch.entity.Batch;
+import lk.wisdom_institute.asset.batch_exam.entity.BatchExam;
+import lk.wisdom_institute.asset.student.entity.Student;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,7 +17,7 @@ public class BatchExamResultStudent {
   private BatchExam batchExam;
   private Batch batch;
   private long attendCount;
-  private List< Student > attendStudents;
+  private List<Student> attendStudents;
   private long absentCount;
   private List< Student > absentStudents;
   private List< Student > aPlusStudents;

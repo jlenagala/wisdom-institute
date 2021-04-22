@@ -2,19 +2,19 @@
 <html lang="en" >
 <head data-th-replace="~{fragments/header :: headerFragment}" >
   <meta charset="UTF-8" >
-  <title >Success Student Management System</title >
+  <title >Wisdom Student Management System</title >
 </head >
 <body >
 <nav data-th-replace="~{fragments/navBar :: navBarFragment}" ></nav >
 
 <div class="container-fluid form-Border" >
   <div class="row text-center formManagement border-info" >
-    <div class="col-3" ></div >
-    <div class="col-6" >
+    <div class="col-8" ></div >
+    <div class="col-4" >
       <div class="form-row" >
-        <a class="btn btn-success mr-2" data-th-href="${'/user/add'}" >
+        <a class="btn btn-primary mr-2" data-th-href="${'/user/add'}" >
           <i class="fa fa-user-plus" ></i > &nbsp; Add User Employee</a >
-        <a class="btn btn-success mr-2" data-th-href="${'/user/studentAdd'}" >
+        <a class="btn btn-primary mr-2" data-th-href="${'/user/studentAdd'}" >
           <i class="fa fa-user-plus" ></i > &nbsp; Add User Student</a >
       </div >
     </div >
@@ -23,7 +23,7 @@
   <div class="row text-center formManagement border-info" >
     <div class="col-4" ></div >
     <div class="col-4" >
-      <h4 class="text-info text-center" >
+      <h4 class="text-primary text-center" >
         <strong >
           User Management
         </strong >
@@ -50,15 +50,15 @@
           <tbody >
           <tr data-th-each="user, rowCount : ${users}" scope="row" >
             <th data-th-text="${rowCount.count}" ></th >
-            <th data-th-text="${user.username}" ></th >
-            <th >
-              <span data-th-if="${user.employee != null}" data-th-text="${user.employee.name}" ></span >
-              <span data-th-if="${user.student != null}" data-th-text="${user.student.name}" ></span >
-            </th >
+            <th data-th-text="${user.username}">
+              <span data-th-if="${user.employee != null}" data-th-text="${user.employee.name}"></span>
+              <span data-th-if="${user.student != null}" data-th-text="${user.student.name}"></span>
+            </th>
+            <th data-th-text="${user.employee.designation}"></th>
             <th data-th-text="${user.enabled==true?'Active':'Blocked'}" ></th >
             <th data-th-text="${{user.createdAt}}" ></th >
             <th >
-              <a class="btn btn-success btn-sm" id="userView" >
+              <a class="btn btn-info btn-sm" id="userView" >
                 <i class="fa fa-folder-open" data-th-href="${'/user/' + user.id}" ></i >&nbsp;View</a >
               <a class="btn btn-primary btn-sm" id="userEdit" data-th-href="${'/user/edit/' + user.id}" >
                 <i class="fa fa-edit" ></i >&nbsp;Edit</a >

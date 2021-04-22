@@ -1,6 +1,7 @@
 package lk.wisdom_institute.asset.report.model;
 
-import lk.real_way_institute.asset.student.entity.Student;
+
+import lk.wisdom_institute.asset.student.entity.Student;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

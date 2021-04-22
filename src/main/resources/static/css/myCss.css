@@ -39,7 +39,7 @@ body {
 }
 
 .checkbox-round:checked {
-    background-color: green;
+    background-color: #bbcbf0;
 }
 
 /*radio button style -end*/
@@ -292,6 +292,11 @@ input {
     -moz-animation: AnimationName 31s ease infinite;
     -o-animation: AnimationName 31s ease infinite;
     animation: AnimationName 31s ease infinite;
+}
+#loginPage {
+    margin-top: 100px;
+    color: #000000;
+
 }
 /*
 

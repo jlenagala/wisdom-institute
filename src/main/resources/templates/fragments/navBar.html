@@ -8,7 +8,7 @@
      th:fragment="navBarFragment" >
   <div class="col " >
     <a class="navbar-brand mt-5 pt-4" href="/home" >
-      <img data-th-src="${'/img/navbarlogo.png'}" alt="Nav bar logo" id="navBarLogo" >
+      <img data-th-src="${'/img/logo.jpg'}" alt="Nav bar logo" id="navBarLogo" >
     </a >
   </div >
   <div class="col pt-5" >
@@ -17,12 +17,12 @@
           data-sec-authorize="hasAnyAuthority('ROLE_MANAGER','ROLE_CASHIER','ROLE_SECTION_HEAD','ROLE_ADMIN')" >
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink1" data-toggle="dropdown"
            aria-haspopup="true" aria-expanded="false" >
-          Management Functions
+          &nbsp; &nbsp; &nbsp; General Functions &nbsp; &nbsp; &nbsp;
         </a >
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink1" >
 
           <a data-sec-authorize="hasAnyAuthority('ROLE_MANAGER','ROLE_CASHIER','ROLE_SECTION_HEAD','ROLE_STUDENT')"
-             class="dropdown-item " href="/batch" >Batch
+             class="dropdown-item " href="/batch" >Class
                                                    Management</a >
           <a data-sec-authorize="hasAnyAuthority('ROLE_MANAGER','ROLE_CASHIER','ROLE_SECTION_HEAD')"
              class="dropdown-item " href="/batchExam	" > Exam
@@ -31,8 +31,7 @@
             Employee
             Management </a >
           <a data-sec-authorize="hasAnyAuthority('ROLE_MANAGER','ROLE_CASHIER')" class="dropdown-item "
-             href="/payment" >Payment Management
-                              Management</a >
+             href="/payment" >Payment Management</a >
           <a data-sec-authorize="hasAnyAuthority('ROLE_MANAGER','ROLE_ADMIN')" class="dropdown-item " href="/role" >Role
                                                                                                                     Management</a >
           <a data-sec-authorize="hasAnyAuthority('ROLE_MANAGER','ROLE_CASHIER','ROLE_SECTION_HEAD','ROLE_STUDENT')"
@@ -51,7 +50,7 @@
           data-sec-authorize="hasAnyAuthority('ROLE_MANAGER','ROLE_CASHIER','ROLE_SECTION_HEAD','ROLE_ADMIN')" >
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown"
            aria-haspopup="true" aria-expanded="false" >
-          Transaction
+          &nbsp;&nbsp;Transaction &nbsp; &nbsp;
         </a >
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink2" >
           <a data-sec-authorize="hasAnyAuthority('ROLE_MANAGER','ROLE_CASHIER')" class="dropdown-item "
@@ -70,14 +69,14 @@
              href="/user/add	" > New
                                   User </a >
           <a data-sec-authorize="hasAnyAuthority('ROLE_MANAGER','ROLE_ADMIN')" class="dropdown-item "
-             href="/payment/message" >Send Payment Remainder</a >
+             href="/payment/message" >Payment Remainder</a >
 
         </div >
       </li >
       <li class="nav-item dropdown no-arrow "
           data-sec-authorize="hasAnyAuthority('ROLE_MANAGER','ROLE_CASHIER','ROLE_SECTION_HEAD','ROLE_ADMIN')" >
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink3" data-toggle="dropdown"
-           aria-haspopup="true" aria-expanded="false" > Reports </a >
+           aria-haspopup="true" aria-expanded="false" >&nbsp;&nbsp; Reports &nbsp;&nbsp; </a >
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink3" >
           <a data-sec-authorize="hasAnyAuthority('ROLE_MANAGER','ROLE_CASHIER')" class="dropdown-item "
              href="/report/income" >Income</a >
@@ -111,15 +110,18 @@
           <a class="dropdown-item" href="/profile" >
             <i class="fas fa-user-cog mr-2" ></i >Profile
           </a >
-          <a class="dropdown-item" href="/passwordChange" >
+          <a class="dropdown-item" href="/passwordChange" data-sec-authorize="isAuthenticated()">
             <i class="fas fa-key mr-2" ></i >Change Password</a >
+          <a class="dropdown-item" href="/logout" >
+            <i class="fas fa-sign-out-alt" ></i > Log Out</a >
+
         </div >
       </li >
 
-      <li class="nav-item dropdown no-arrow " data-sec-authorize="isAuthenticated()" >
+    <!--  <li class="nav-item dropdown no-arrow " data-sec-authorize="isAuthenticated()" >
         <a href="/logout" class="nav-link" > <i class="fas fa-sign-out-alt" ></i >&nbsp;&nbsp; Log
                                                                                   out</a >
-      </li >
+      </li >-->
       <li class="nav-item dropdown no-arrow  " data-sec-authorize="!isAuthenticated()" >
         <a href="/login" class="nav-link" ><i class="fas fa-sign-in-alt" ></i >&nbsp;&nbsp;Login</a >
       </li >

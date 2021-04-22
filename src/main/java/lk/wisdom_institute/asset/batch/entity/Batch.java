@@ -69,6 +69,7 @@ public class Batch extends AuditEntity {
       joinColumns = @JoinColumn(name = "batch_id"),
       inverseJoinColumns = @JoinColumn(name = "subject_id"))
   private List< Subject > subjects;
+
   @Enumerated( EnumType.STRING )
   private Grade grade;
   @Enumerated( EnumType.STRING )

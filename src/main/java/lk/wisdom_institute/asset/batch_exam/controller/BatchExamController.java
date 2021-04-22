@@ -116,9 +116,9 @@ public class BatchExamController {
       BatchExam lastBatchExam = batchExamService.lastBatchExamDB();
       if ( lastBatchExam != null ) {
         String lastNumber = lastBatchExam.getCode().substring(3);
-        batchExam.setCode("SSB" + makeAutoGenerateNumberService.numberAutoGen(lastNumber));
+        batchExam.setCode("BEX" + makeAutoGenerateNumberService.numberAutoGen(lastNumber));
       } else {
-        batchExam.setCode("SSB" + makeAutoGenerateNumberService.numberAutoGen(null));
+        batchExam.setCode("BEX" + makeAutoGenerateNumberService.numberAutoGen(null));
       }
     }
 
@@ -129,7 +129,7 @@ public class BatchExamController {
         String message =
             "Dear " + student.getName() + "\n Your batch " + batchService.findById(batchExamDb.getBatch().getId()).getName() + " subject " + batchExamDb.getSubject().getName() + "'s exam " +
                 "would be held from " + batchExamDb.getStartAt() + " to " + batchExamDb.getEndAt() + ".\n Thanks \n " +
-                "Success Student";
+                "You";
         try {
           emailService.sendEmail(student.getEmail(), "Exam - Notification", message);
         } catch ( MailException e ) {
