@@ -74,9 +74,9 @@ public class SubjectController implements AbstractController< Subject, Integer >
     if ( subject.getId() == null ) {
       Subject lastSubject = subjectService.lastSubject();
       if ( lastSubject == null ) {
-        subject.setCode("RWS" + makeAutoGenerateNumberService.numberAutoGen(null).toString());
+        subject.setCode("SUB" + makeAutoGenerateNumberService.numberAutoGen(null).toString());
       } else {
-        subject.setCode("RWS" + makeAutoGenerateNumberService.numberAutoGen(lastSubject.getCode()
+        subject.setCode("SUB" + makeAutoGenerateNumberService.numberAutoGen(lastSubject.getCode()
                                                                                  .substring(3)).toString());
       }
     }

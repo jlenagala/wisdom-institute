@@ -39,6 +39,7 @@ public class Student extends AuditEntity {
 
   private String address;
 
+  private String guardian;
 
   private String mobile;
 

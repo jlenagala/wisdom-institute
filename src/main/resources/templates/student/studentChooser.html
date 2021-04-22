@@ -65,7 +65,7 @@
     <tr >
       <th >Index</th >
       <th >Registration ID</th >
-      <th >First Name</th >
+      <th >Name</th >
       <th >School</th >
       <th >Guardian</th >
       <th >Mobile Number</th >
@@ -77,7 +77,7 @@
     <tr data-th-each="student, index : ${students}" >
       <td data-th-text="${index.count}" ></td >
       <td data-th-text="${student.regNo}" ></td >
-      <td data-th-text="${student.firstName}" ></td >
+      <td data-th-text="${student.name}" ></td >
       <td data-th-text="${student.school.name}" ></td >
       <td data-th-text="${student.guardian}" ></td >
       <td data-th-text="${student.mobile}" ></td >

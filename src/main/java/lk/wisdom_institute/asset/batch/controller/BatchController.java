@@ -6,9 +6,12 @@ import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
 import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
 
 import lk.wisdom_institute.asset.batch.entity.Batch;
+import lk.wisdom_institute.asset.batch.entity.enums.ClassDay;
+import lk.wisdom_institute.asset.batch.entity.enums.Grade;
 import lk.wisdom_institute.asset.batch.service.BatchService;
 import lk.wisdom_institute.asset.batch_student.service.BatchStudentService;
 import lk.wisdom_institute.asset.common_asset.model.enums.LiveDead;
+import lk.wisdom_institute.asset.employee.entity.enums.Designation;
 import lk.wisdom_institute.asset.employee.service.EmployeeService;
 import lk.wisdom_institute.asset.instalment_date.entity.InstalmentDate;
 import lk.wisdom_institute.asset.student.service.StudentService;
@@ -58,9 +61,9 @@ public class BatchController implements AbstractController< Batch, Integer > {
   }
 
   private String commonMethod(Model model, Batch batch, boolean addStatus) {
-    // model.addAttribute("employees",employeeService.findByDesignation(Designation.INSTRUCTOR));
-    //todo : for demo remove above ones and delete below one
-    model.addAttribute("employees", employeeService.findAll());
+    model.addAttribute("employees",employeeService.findByDesignation(Designation.INSTRUCTOR));
+    model.addAttribute("grades", Grade.values());
+    model.addAttribute("classDays", ClassDay.values());
     model.addAttribute("batch", batch);
     model.addAttribute("addStatus", addStatus);
     model.addAttribute("liveDeads", LiveDead.values());

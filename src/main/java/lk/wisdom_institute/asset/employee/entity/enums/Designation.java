@@ -6,9 +6,9 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum Designation {
-  ADMIN("Admin"),
+    ADMIN("Admin"),
     MANAGER("Manager"),
-    SECTION("Section Head "),
+    SECTION_HEAD("Section Head"),
     INSTRUCTOR("Instructor"),
     HR_MANAGER("HR Manager"),
     CASHIER("Cashier");
