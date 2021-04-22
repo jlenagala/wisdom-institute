@@ -1,10 +1,9 @@
 package lk.wisdom_institute.asset.instalment_date.controller;
 
-import lk.wisdom_institute.asset.common_asset.model.enums.LiveDead;
-import lk.wisdom_institute.asset.instalment_date.entity.InstalmentDate;
-import lk.wisdom_institute.util.interfaces.AbstractController;
-import lk.wisdom_institute.util.service.MakeAutoGenerateNumberService;
-import lk.wisdom_institute.asset.instalment_date.service.InstalmentDateService;
+import lk.real_way_institute.asset.instalment_date.entity.InstalmentDate;
+import lk.real_way_institute.asset.instalment_date.service.InstalmentDateService;
+import lk.real_way_institute.util.interfaces.AbstractController;
+import lk.real_way_institute.util.service.MakeAutoGenerateNumberService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -93,7 +92,7 @@ public class InstalmentDateController implements AbstractController< InstalmentD
   @GetMapping( "/active/{id}" )
   public String active(@PathVariable Integer id) {
     InstalmentDate instalmentDate = instalmentDateService.findById(id);
-    instalmentDate.setLiveDead(LiveDead.ACTIVE);
+   // instalmentDate.setLiveDead(LiveDead.ACTIVE);
     instalmentDateService.persist(instalmentDate);
     return "redirect:/instalmentDate/delete";
   }

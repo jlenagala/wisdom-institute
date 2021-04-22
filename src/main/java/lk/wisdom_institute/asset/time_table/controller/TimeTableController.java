@@ -10,11 +10,11 @@ import lk.wisdom_institute.asset.common_asset.model.enums.LiveDead;
 import lk.wisdom_institute.asset.student.entity.Student;
 import lk.wisdom_institute.asset.student.service.StudentService;
 import lk.wisdom_institute.asset.subject.service.SubjectService;
-import lk.wisdom_institute.asset.time_table.entity.*;
+import lk.wisdom_institute.asset.time_table.entity.TimeTable;
 import lk.wisdom_institute.asset.time_table.model.TimeTableDate;
 import lk.wisdom_institute.asset.time_table.service.TimeTableService;
 import lk.wisdom_institute.asset.user_management.entity.User;
-import lk.wisdom_institute.asset.user_management.service.*;
+import lk.wisdom_institute.asset.user_management.service.UserService;
 import lk.wisdom_institute.util.service.DateTimeAgeService;
 import lk.wisdom_institute.util.service.EmailService;
 import lk.wisdom_institute.util.service.MakeAutoGenerateNumberService;
@@ -228,9 +228,9 @@ public class TimeTableController {
       if ( timeTable.getId() == null ) {
         TimeTable lastTimeTable = timeTableService.lastTimeTable();
         if ( lastTimeTable == null ) {
-          timeTable.setCode("TMTB" + makeAutoGenerateNumberService.numberAutoGen(null).toString());
+          timeTable.setCode("SSTM" + makeAutoGenerateNumberService.numberAutoGen(null).toString());
         } else {
-          timeTable.setCode("TMTB" + makeAutoGenerateNumberService.numberAutoGen(lastTimeTable.getCode().substring(4)).toString());
+          timeTable.setCode("SSTM" + makeAutoGenerateNumberService.numberAutoGen(lastTimeTable.getCode().substring(4)).toString());
         }
       }
       TimeTable timeTableDb = timeTableService.persist(timeTable);

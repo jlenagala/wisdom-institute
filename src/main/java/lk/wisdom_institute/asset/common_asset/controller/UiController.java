@@ -31,7 +31,7 @@ public class UiController {
   public String getHome(Model model) {
     User user = userService.findByUserName(SecurityContextHolder.getContext().getAuthentication().getName());
     if ( user.getStudent() != null ) {
-      return "student/mainWindow";
+      return "redirect:/studentDetail";
     }
     return "mainWindow";
   }

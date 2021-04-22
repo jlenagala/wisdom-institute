@@ -53,7 +53,7 @@ public class ReportController {
   private String commonIncomeReport(Model model, LocalDate startDate, LocalDate endDate) {
     LocalDateTime startDateTime = dateTimeAgeService.dateTimeToLocalDateStartInDay(startDate);
     LocalDateTime endDateTime = dateTimeAgeService.dateTimeToLocalDateEndInDay(endDate);
-
+    System.out.println(" astar "+startDateTime + "  end "+endDateTime);
     List< Payment > payments = paymentService.findByCreatedAtIsBetween(startDateTime, endDateTime);
 
     List< BigDecimal > totalPaymentAmount = new ArrayList<>();

@@ -17,7 +17,7 @@
     <h1 >Payment Details</h1 >
   </div >
   <div class="col-4" >
-    <a href="/payment/add" >
+    <a href="/payment/add" data-sec-authorize="hasAnyAuthority('ROLE_MANAGER','ROLE_CASHIER','ROLE_SECTION_HEAD')">
       <button class="btn btn-primary" align="center" >Make a Payment</button >
     </a >
   </div >
@@ -25,7 +25,7 @@
 <!--Discount detail-->
 <div class="container" data-th-fragment="paymentDetail" id="printContent" >
   <div class="container text-center" >
-    <h4 >Wisdom Institute</h4 >
+    <h4 >Real Way Institute</h4 >
     <p >Kalawana </p >
     <p >Rathnapura</p >
     <p >Tp: 07837733</p >

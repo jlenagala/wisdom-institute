@@ -12,14 +12,14 @@
 <div class="container" >
   <div class="row text-center" >
     <div class="col-4" >
-      <a href="/batch" >
+      <a href="/batch" data-sec-authorize="hasAnyAuthority('ROLE_MANAGER','ROLE_CASHIER','ROLE_SECTION_HEAD')">
         <button class="btn btn-primary" align="center" >All Course</button >
       </a >
     </div >
     <div class="col-4" >
       <h1 >Course Details</h1 >
     </div >
-    <div class="col-4" >
+    <div class="col-4" data-sec-authorize="hasAnyAuthority('ROLE_MANAGER','ROLE_CASHIER','ROLE_SECTION_HEAD')">
       <a href="/batch/add" >
         <button class="btn btn-primary" align="center" >Add Course</button >
       </a >
@@ -29,7 +29,7 @@
 
 <div class="container" style="background-color:#d0cdce;" data-th-fragment="batchDetailsFragment" >
   <div class="row " >
-    <div class="col-6"  >
+    <div class="col-6" >
       <div class="form-group" >
         <label data-th-for="${code}" class="col-sm-6 control-label" >Courser Reference</label >
         <div class="" >
@@ -137,10 +137,82 @@
     </div >
 
   </div >
+  <!--timeTable-->
+  <div class="row" >
+    <div class="col text-center" >
+      <h3 class="bg-gradient-success text-white text-center p-1" > Time Table</h3 >
+    </div >
+  </div >
+  <div class="row" >
+    <div class="container" >
+      <table class="table table-striped table-inverse " id="myTable" >
+        <thead class="thead-inverse" >
+        <tr >
+          <th >Index</th >
+          <th >Code</th >
+          <th >Lesson</th >
+          <th >Start Time</th >
+          <th >End Time</th >
+          <th >Active/Not</th >
+        </tr >
+        </thead >
+        <tbody >
+        <tr data-th-each="timeTable, index : ${batchDetail.timeTables}" >
+          <td data-th-text="${index.count}" ></td >
+          <td data-th-text="${timeTable.code}" ></td >
+          <td data-th-text="${timeTable.lesson}" ></td >
+          <td data-th-text="${#temporals.format(timeTable.startAt, 'dd-MM-yyyy HH:mm')}" ></td >
+          <td data-th-text="${#temporals.format(timeTable.endAt, 'dd-MM-yyyy HH:mm')}" ></td >
+          <td data-th-text="${timeTable.liveDead.liveDead}" ></td >
+        </tr >
+        </tbody >
+      </table >
+    </div >
+  </div >
+  <!--batch exam-->
+  <div class="row" >
+    <div class="col text-center" >
+      <h3 class="bg-gradient-success text-white text-center p-1" > Batch Exam</h3 >
+    </div >
+  </div >
+  <div class="row" >
+    <div class="container" >
+      <table class="table table-striped table-inverse "  >
+        <thead class="thead-inverse" >
+        <tr >
+          <th >Index</th >
+          <th >Batch Name</th >
+          <th >Subject Name</th >
+          <th >Start At</th >
+          <th >End At</th >
+          <th>View</th>
+        </tr >
+        </thead >
+        <tbody >
+        <tr data-th-each="batchExam, index : ${batchDetail.batchExams }" >
+          <td data-th-text="${index.count}" ></td >
+          <td data-th-text="${batchExam.batch.name}" ></td >
+          <td data-th-text="${batchExam.subject.name}" ></td >
+          <td data-th-text="${#temporals.format(batchExam.startAt, 'dd-MM-yyyy HH:mm')}" ></td >
+          <td data-th-text="${#temporals.format(batchExam.endAt, 'dd-MM-yyyy HH:mm')}" ></td >
+          <td >
+            <a data-th-if="${#strings.equals(batchExam.examStatus,'DETAIL')}"
+               data-th-href="${'/batchExam/view/'+ batchExam.id}" >
+              <button type="button" class="btn btn-success" >View</button >
+            </a >
+          </td >
+        </tr >
+        </tbody >
+      </table >
+    </div >
+  </div >
 </div >
 <div class="row container-fluid" >
   <div class="col text-center" >
-    <a href="/batch" >
+    <a href="/batch" data-sec-authorize="hasAnyAuthority('ROLE_MANAGER','ROLE_CASHIER','ROLE_SECTION_HEAD')">
+      <button type="link" class="btn btn-danger " >Back</button >
+    </a >
+    <a href="/home" data-sec-authorize="hasAnyAuthority('ROLE_STUDENT')">
       <button type="link" class="btn btn-danger " >Back</button >
     </a >
   </div >
