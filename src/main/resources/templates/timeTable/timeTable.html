@@ -3,7 +3,7 @@
 <!--Styles, meta data, and title are included-->
 <head data-th-replace="~{fragments/header :: headerFragment}" >
   <meta charset="UTF-8" >
-  <title >Success TimeTable Management</title >
+  <title >Wisdom TimeTable Management</title >
 </head >
 <body >
 
@@ -28,15 +28,17 @@
 
 <div class="container-fluid" >
   <div class="row" >
+
+    &nbsp;
     <!--Custom Invoice search-->
     <button type="button" class="btn btn-info btn-block text-capitalize" data-toggle="collapse"
             data-target="#dataTargetCollapse"
-            aria-expanded="false" aria-controls="dataTargetCollapse"
-    > Custom Date Search
+            aria-expanded="false" aria-controls="dataTargetCollapse"> Custom Date Search
     </button >
+    &nbsp;
     <div class="collapse mx-auto" id="dataTargetCollapse" >
-      <div class="container-fluid text-center" >
-        <h4 class="text-info" ><b > Custom Search</b ></h4 >
+      <div class=" container-fluid text-center" >
+        <h4 class="text-dark" ><b > Custom Search</b ></h4 >
         <div class="row" >
           <div class="col" >
             <form class="form-inline" data-th-action="@{/timeTable}" data-th-method="POST" >

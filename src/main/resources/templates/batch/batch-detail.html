@@ -3,7 +3,7 @@
 <!--Styles, meta data, and title are included-->
 <head data-th-replace="~{fragments/header :: headerFragment}" >
   <meta charset="UTF-8" >
-  <title >Success Educational Institute</title >
+  <title >Wisdom Educational Institute</title >
 </head >
 <body >
 <!--Nav bar is included-->
@@ -13,25 +13,27 @@
   <div class="row text-center" >
     <div class="col-4" >
       <a href="/batch" >
-        <button class="btn btn-primary" align="center" >All Course</button >
+        <button class="btn btn-primary" align="center" >All Classes</button >
       </a >
     </div >
     <div class="col-4" >
-      <h1 >Course Details</h1 >
+      <h1 >Class Details</h1 >
     </div >
+
     <div class="col-4" >
       <a href="/batch/add" >
-        <button class="btn btn-primary" align="center" >Add Course</button >
+        <button class="btn btn-primary" align="center" >Add Class</button >
       </a >
     </div >
   </div >
+  &nbsp
 </div >
 
 <div class="container" style="background-color:#d0cdce;" data-th-fragment="batchDetailsFragment" >
   <div class="row " >
     <div class="col-6"  >
       <div class="form-group" >
-        <label data-th-for="${code}" class="col-sm-6 control-label" >Courser Reference</label >
+        <label data-th-for="${code}" class="col-sm-6 control-label" >Class Reference</label >
         <div class="" >
           <p type="text" id="code" class="form-control" data-th-text="${batchDetail.code}" >
         </div >
@@ -45,7 +47,7 @@
     </div >
     <div class="col-6" >
       <div class="form-group" >
-        <label data-th-for="${grade}" class="col-sm-3 control-label" >Course Fee</label >
+        <label data-th-for="${grade}" class="col-sm-3 control-label" >Class Fee</label >
         <div class="" >
           <p type="text" id="grade" class="form-control" data-th-text="${batchDetail.courseFee}" >
         </div >
@@ -138,8 +140,10 @@
 
   </div >
 </div >
-<div class="row container-fluid" >
-  <div class="col text-center" >
+&nbsp;
+<div class="row container-fluid " >
+  <div class="col text-right" >
+    &nbsp;
     <a href="/batch" >
       <button type="link" class="btn btn-danger " >Back</button >
     </a >

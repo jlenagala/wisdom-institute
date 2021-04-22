@@ -129,7 +129,7 @@ public class BatchExamController {
         String message =
             "Dear " + student.getName() + "\n Your batch " + batchService.findById(batchExamDb.getBatch().getId()).getName() + " subject " + batchExamDb.getSubject().getName() + "'s exam " +
                 "would be held from " + batchExamDb.getStartAt() + " to " + batchExamDb.getEndAt() + ".\n Thanks \n " +
-                "Success Student";
+                "You";
         try {
           emailService.sendEmail(student.getEmail(), "Exam - Notification", message);
         } catch ( MailException e ) {

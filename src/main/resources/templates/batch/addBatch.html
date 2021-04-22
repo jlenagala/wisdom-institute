@@ -17,7 +17,7 @@
     </div>
     <div class="col-4">
         <a href="/batch">
-            <button class="btn btn-primary">All Courses</button>
+            <button class="btn btn-primary">All Classes</button>
         </a>
     </div>
 </div>
@@ -135,15 +135,7 @@
         <!--batch name-->
         <div class="form-group">
             <div class="row">
-                <div class="col-6" data-th-if="${addStatus==true}">
-                    <div class="form-group">
-                        <!--     <label data-th-for="${name}" class="control-label col-4">Enter Name :</label>
-                             <div class="">
-                                 <input type="text" id="enterName" placeholder="Enter Name" class="form-control"
-                                        required>
-                             </div>-->
-                    </div>
-                </div>
+
                 <div data-th-class="${addStatus==false?'col-12':'col-6'}">
                     <div class="form-group">
                         <label data-th-for="${name}" class="control-label col-4">Batch Name :</label>
@@ -152,6 +144,15 @@
                                    class="form-control"
                                    autofocus readonly>
                         </div>
+                    </div>
+                </div>
+                <div class="col-6" data-th-if="${addStatus==true}">
+                    <div class="form-group">
+                        <!--     <label data-th-for="${name}" class="control-label col-4">Enter Name :</label>
+                             <div class="">
+                                 <input type="text" id="enterName" placeholder="Enter Name" class="form-control"
+                                        required>
+                             </div>-->
                     </div>
                 </div>
             </div>
@@ -172,7 +173,7 @@
                 </div>
                 <div data-th-class="${addStatus==false?'col-12':'col-6'}">
                     <div class="form-group">
-                        <label data-th-for="${name}" class="control-label col-4">Course Price :</label>
+                        <label data-th-for="${name}" class="control-label col-4">Class Price (Yearly) :</label>
                         <div class="">
                             <input type="number" step=".01" min="0" id="courseFee" data-th-field="*{courseFee}"
                                    placeholder="price"
@@ -301,11 +302,11 @@
         </div>
 
         <div class="row ">
-            <div class="container-fluid  text-center">
+            <div class="container-fluid  text-right">
                 <a href="/batch">
                     <button type="button" class="btn btn-danger ">Back</button>
                 </a>
-                <button type="reset" class="btn btn-warning ">Clear Data</button>
+                <button type="reset" class="btn btn-warning">Clear</button>
                 <button type="submit" id="submit" class="btn btn-success ">Submit</button>
             </div>
         </div>

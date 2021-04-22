@@ -240,7 +240,7 @@ public class TimeTableController {
           if ( student.getEmail() != null ) {
             String message = "Dear " + student.getName() + "\n Your " + timeTableDb.getBatch().getName() + " class " +
                 "would be held from " + timeTableDb.getStartAt() + " to " + timeTableDb.getEndAt() + "\n Thanks \n " +
-                "Success Student";
+                "You ";
             emailService.sendEmail(student.getEmail(), "Time Table - Notification", message);
           }
         });
